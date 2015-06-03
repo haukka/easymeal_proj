@@ -1,0 +1,127 @@
+<div id="sidebar">
+  <%= link_to "Général", edit_user_path(current_user),id: "general" %>
+  <a id="alimentation" href="/allergen_and_favorite_aliments">Alimentation</a>
+  <a id="health" href="#">Santé</a>
+  <div class="health"></div>
+</div>
+
+<div id="page" style="margin-top: -10px">
+  <div class="col-md-11">
+    <h1>Santé</h1>
+  </div>
+  <div class="row">
+    <div class="col-md-11">
+      <h2>Régime suivi : <small> <%= current_user.diet_type.name %></small></h2>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-11">
+      <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+	Modifier le régime à suivre
+      </button>
+    </div>
+  </div>
+  <br />
+  <br />
+  <div class="row">
+    <div class="col-md-11">
+      <div class="panel panel-success">
+	<div class="panel-heading">Maladie</div>
+	<div class="panel-body" id="disease_id">
+	  <% @user_disease.each do |disease| %>
+	  <ul class="list-inline" style="text-align: left; margin-left: 4px;">
+	    <%= link_to disease.name, :controller => :diseases, :action => :show, :id => disease.id %>
+	    <%= link_to '', disease, method: :delete, data: { confirm: 'Are you sure?'}, :class => "glyphicon glyphicon-remove", style: "color: red;" %>
+	  </ul>
+	  <% end %>
+	</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-11">
+	<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#disease_modal">
+	  Ajouter une maladie
+	</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+  $(document).ready(function() {
+  emptydiv_disease();
+  select_diet();
+  submit_diet();
+  select_disease();
+  add_disease();
+  });
+</script>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_for @diet_type, url: {action: "add_to_user"} do |f| %>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Modifier le régime suivi</h4>
+      </div>
+      <div class="modal-body">
+	<% if @diet_type.errors.any? %>
+	<div id="error_explanation">
+	  <h2><%= pluralize(@diet_type.errors.count, "error") %> prohibited this diet_type from being saved:</h2>
+	  <ul>
+	    <% @diet_type.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+	    <% end %>
+	  </ul>
+	</div>
+	<% end %>
+	<%= collection_select(nil, :diet_type_id,  @diet_types.limit(3), :id, :name, {:prompt   => "Select a diettype"}, {:id => 'diettypes_select', :class=>'form-control', :style=> 'width: 200px'}) %>
+	<div class="field">
+	  <%= f.text_field :name, class: "hide", id: "dietname" %>     
+	</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Retour</button>
+	<%= f.submit "Ajouter", class: "btn btn-large btn-success" %>
+	<% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="disease_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_for @disease, :url => {:controller => "diseases", :action => "add_disease_to_user"} do |f| %>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Ajouter une maladie</h4>
+      </div>
+      <div class="modal-body">
+	<% if @disease.errors.any? %>
+	<div id="error_explanation">
+	  <h2><%= pluralize(@disease.errors.count, "error") %> prohibited this disease from being saved:</h2>
+	  <ul>
+	    <% @disease.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+	    <% end %>
+	  </ul>
+	</div>
+	<% end %>
+	<%= collection_select(nil, :disease_id,  @diseases.limit(10), :id, :name, {:prompt   => "Select a disease"}, {:id => 'diseases_select', :class=>'form-control', :style=> 'width: 200px'}) %>
+	<div class="field">
+	  <%= f.text_field :name, class: "hide", id: "disease" %>     
+	</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Retour</button>
+	<%= f.submit "Ajouter", class: "btn btn-large btn-success" %>
+	<% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div>

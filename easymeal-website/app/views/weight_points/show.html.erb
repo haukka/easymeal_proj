@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nom de l'utilisateur:</strong>
+  <%= @weight_point.user.firstname %>
+</p>
+
+<p>
+  <strong>Poids:</strong>
+  <%= @weight_point.weight %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @weight_point.date %>
+</p>
+
+<%= link_to 'Retour', weight_points_path %>

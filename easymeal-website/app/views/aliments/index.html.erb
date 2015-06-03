@@ -1,0 +1,25 @@
+<h1>Listing aliments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @aliments.each do |aliment| %>
+      <tr>
+        <td><%= link_to 'Show', aliment %></td>
+        <td><%= link_to 'Edit', edit_aliment_path(aliment) %></td>
+        <td><%= link_to 'Destroy', aliment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Aliment', new_aliment_path %>

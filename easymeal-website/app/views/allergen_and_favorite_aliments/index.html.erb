@@ -1,0 +1,116 @@
+<div id="sidebar">
+  <%= link_to "Général", edit_user_path(current_user),id: "general" %>
+  <a id="alimentation" href="#">Alimentation</a>
+  <a id="health" href="/diet_types">Santé</a>
+  <div class="alimentation"></div>
+</div>
+
+<div id="page" style="margin-top: -10px">
+  <div class="col-md-11">
+    <h1>Préférences alimentaires</h1>
+  </div>
+  <div class="row">
+    <div class="col-md-11">
+      <div class="panel panel-success">
+	<div class="panel-heading">Aliments allergiques</div>
+	<div class="panel-body" id="allergen_id">
+	  <% @allergen_aliment.each do |allergen_and_favorite_aliment| %>
+	  <ul class="list-inline" style="text-align: left; margin-left: 4px;">
+	    <li><%= allergen_and_favorite_aliment.aliment.name %>
+	      <%= link_to '', edit_allergen_and_favorite_aliment_path(allergen_and_favorite_aliment), :class => "glyphicon glyphicon-edit", style: "color: green;"  %></li>
+	  </ul>
+	  <% end %>
+	</div>
+      </div>
+      <div class="panel panel-success">
+	<div class="panel-heading">Aliments favori</div>
+	<div class="panel-body"  id="favori_id">
+	  <% @favorite_aliment.each do |allergen_and_favorite_aliment| %>
+	  <ul class="list-inline" style="text-align: left; margin-left: 4px;">
+	    <li><%= allergen_and_favorite_aliment.aliment.name %>
+	      <%= link_to '', edit_allergen_and_favorite_aliment_path(allergen_and_favorite_aliment), :class => "glyphicon glyphicon-edit", style: "color: green;"  %></li>
+	  </ul>
+	  <% end %>
+	</div>
+      </div>
+      <div class="panel panel-success">
+	<div class="panel-heading">Aliments pas aimé</div>
+	<div class="panel-body"  id="nfavori_id">
+	  <% @nfavorite_aliment.each do |allergen_and_favorite_aliment| %>
+	  <ul class="list-inline" style="text-align: left; margin-left: 4px;">
+	    <li><%= allergen_and_favorite_aliment.aliment.name %>
+	      <%= link_to '', edit_allergen_and_favorite_aliment_path(allergen_and_favorite_aliment), :class => "glyphicon glyphicon-edit", style: "color: green;"  %></li>
+	  </ul>
+	  <% end %>
+	</div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-11">
+      <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+	Ajouter une préférence pour les aliments
+      </button>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+  $(document).ready(function() {
+  completion();
+  valid_submit();
+  empty_div();
+  });
+
+</script>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_for @allergen_and_favorite_aliment do |f| %>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Ajouter une préférence alimentaire</h4>
+      </div>
+      <div class="modal-body">
+	<% if @allergen_and_favorite_aliment.errors.any? %>
+	<div id="error_explanation">
+	  <h2><%= pluralize(@allergen_and_favorite_aliment.errors.count, "error") %> prohibited this allergen_and_favorite_aliment from being saved:</h2>
+	  <ul>
+	    <% @allergen_and_favorite_aliment.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+	    <% end %>
+	  </ul>
+	</div>
+	<% end %>
+	<div class="ui-widget field event">
+	  <input id="project" class="search_bar" value="" style="width:220px;" type="text1">
+	  <%= f.number_field :aliment_id, value: 0, class: "hide" ,id: "project-id" %>
+	  <div id="search_error" class="hidden">Veuillez choisir un aliment</div>
+	</div>
+	<div class="field">
+	  <%= f.label :allergy %><br />
+	  <%= f.label :allergy, "Oui", :value => "true"  %>
+	  <%= f.radio_button :allergy, true %>
+	  <%= f.label :allergy, "Non", :value => "false" %>
+	  <%= f.radio_button :allergy, false, :checked => true %>
+	</div>
+	<div class="field">
+	  <%= f.label :favori, 'Aliment favori ou pas aimé '%><br />
+	  <%= f.label :favori, "Favori", :value => "true"  %>
+	  <%= f.radio_button :favori, true %>
+	  <%= f.label :favori, "Pas aimé", :value => "false" %>
+	  <%= f.radio_button :favori, false, :checked => true %>
+	</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Retour</button>
+	<%= f.submit "Ajouter", class: "btn btn-large btn-success" %>
+	<% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div>

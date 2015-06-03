@@ -1,0 +1,57 @@
+<div class="row">
+  <h1>Courbe de poids</h1>
+  <%= line_chart @weight_points.group(:date).maximum(:weight) %>
+  <br>
+  <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+    Ajouter un poids
+  </button>
+</div>
+</div>
+<script>
+ $(document).ready(function() {
+ choose_date();
+ change_weight();
+ change_date();
+ submit_weight();
+ });
+</script>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_for(@weight_point) do |f| %>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Ajouter un poids</h4>
+      </div>
+      <div class="modal-body">
+	<% if @weight_point.errors.any? %>
+	<div id="error_explanation">
+	  <h2><%= pluralize(@weight_point.errors.count, "error") %> prohibited this weight_point from being saved:</h2>
+	  <ul>
+	    <% @weight_point.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+	    <% end %>
+	  </ul>
+	</div>
+	<% end %>
+	<div class="field">
+	  <%= f.label :weight, 'Entrer votre poids' %><br>
+	  <%= f.number_field :weight, class: "white2" %>
+	  <div id="weight_error" class="hidden">Veuillez ajouter votre poids.</div>
+	</div>
+	<div class="field">
+	  <%= f.label :date, 'Date' %><br>
+	  <%= f.text_field :date, class: "datepicker white2" %>
+	  <div id="date_error" class="hidden">Veuillez ajouter une date.</div>
+	</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Retour</button>
+	<%= f.submit "Ajouter", class: "btn btn-large btn-success" %>
+	<% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div>

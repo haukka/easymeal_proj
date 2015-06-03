@@ -1,0 +1,31 @@
+<h1>Listing menu_schedules</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Weeknumber</th>
+      <th>Year</th>
+      <th>Home</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @menu_schedules.each do |menu_schedule| %>
+      <tr>
+        <td><%= menu_schedule.weekNumber %></td>
+        <td><%= menu_schedule.year %></td>
+        <td><%= menu_schedule.home_id %></td>
+        <td><%= link_to 'Show', menu_schedule %></td>
+        <td><%= link_to 'Edit', edit_menu_schedule_path(menu_schedule) %></td>
+        <td><%= link_to 'Destroy', menu_schedule, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Menu schedule', new_menu_schedule_path %>

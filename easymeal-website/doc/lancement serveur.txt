@@ -1,0 +1,11 @@
+Lancement serveur Rails
+
+Pour lancer le serveur il faut mettre certaines variables dans l'environement :
+  - MAIL_ADDR
+  - MAIL_DOMAIN
+  - MAIL_USR
+  - MAIL_PWD
+  
+Ne pas les mettre dans l'environement de la machine mais au lancement du serveur rails.
+Voici un exemple de commande :
+  MAIL_ADDR="stmp.gmail.com" MAIL_DOMAIN="gmail.com" MAIL_USR="elodie.harkou@gmail.com" MAIL_PWD="bluuuuuu" rails s

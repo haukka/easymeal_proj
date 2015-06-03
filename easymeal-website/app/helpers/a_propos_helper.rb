@@ -1,0 +1,2 @@
+module AProposHelper
+end

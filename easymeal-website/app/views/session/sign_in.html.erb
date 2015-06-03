@@ -1,0 +1,26 @@
+<h1>Connexion</h1>
+
+<% if @errors.count > 0 %>
+  <div class="alert alert-danger">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <% @errors.each do |error| %>
+      <%= error %>
+    <% end %>
+  </div>
+<% end %>
+
+<%= form_tag("/login", method: "post", class: "sign_in") do %>
+  <div class="field">
+    <%= label_tag(:username, "Nom d'utilisateur") %><br>
+    <%= text_field_tag(:username) %>
+  </div>
+  
+  <div class="field">
+    <%= label_tag(:password, "Mot de passe") %><br>
+    <%= password_field_tag(:password) %>
+  </div>
+  
+  <div class="actions">
+    <%= submit_tag("Envoyer", class: "btn btn-large btn-success") %>
+  </div>
+<% end %>

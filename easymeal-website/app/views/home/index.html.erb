@@ -1,0 +1,20 @@
+<div class="home_container">
+  <% if @errors.count > 0 %>
+    <div class="alert alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <% @errors.each do |error| %>
+        <%= error %>
+      <% end %>
+    </div>
+  <% end %>
+  <%= link_to weight_points_path do %>
+  <div class="widget col-md-3">
+    <div class="title">
+      Mon poids
+    </div>
+    <div class="widget_content" style="height: 220px;">
+      <%= line_chart @weight_points.group(:date).maximum(:weight), height: "180px" %>
+    </div>
+  </div>
+  <% end %>
+</div>

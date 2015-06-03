@@ -1,0 +1,113 @@
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :id %><br>
+    <%= f.number_field :id %>
+  </div>
+  <div class="field">
+    <%= f.label :username %><br>
+    <%= f.text_field :username %>
+  </div>
+  <div class="field">
+    <%= f.label :firstname %><br>
+    <%= f.text_field :firstname %>
+  </div>
+  <div class="field">
+    <%= f.label :lastname %><br>
+    <%= f.text_field :lastname %>
+  </div>
+  <div class="field">
+    <%= f.label :password %><br>
+    <%= f.text_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :gender %><br>
+    <%= f.text_field :gender %>
+  </div>
+  <div class="field">
+    <%= f.label :birth %><br>
+    <%= f.date_select :birth %>
+  </div>
+  <div class="field">
+    <%= f.label :mail %><br>
+    <%= f.text_field :mail %>
+  </div>
+  <div class="field">
+    <%= f.label :role %><br>
+    <%= f.number_field :role %>
+  </div>
+  <div class="field">
+    <%= f.label :lastConnexion %><br>
+    <%= f.date_select :lastConnexion %>
+  </div>
+  <div class="field">
+    <%= f.label :loginAttempts %><br>
+    <%= f.number_field :loginAttempts %>
+  </div>
+  <div class="field">
+    <%= f.label :lock %><br>
+    <%= f.date_select :lock %>
+  </div>
+  <div class="field">
+    <%= f.label :islock %><br>
+    <%= f.text_field :islock %>
+  </div>
+  <div class="field">
+    <%= f.label :resetToken %><br>
+    <%= f.text_field :resetToken %>
+  </div>
+  <div class="field">
+    <%= f.label :highCholesterol %><br>
+    <%= f.text_field :highCholesterol %>
+  </div>
+  <div class="field">
+    <%= f.label :highBloodPressure %><br>
+    <%= f.text_field :highBloodPressure %>
+  </div>
+  <div class="field">
+    <%= f.label :height %><br>
+    <%= f.number_field :height %>
+  </div>
+  <div class="field">
+    <%= f.label :weight %><br>
+    <%= f.text_field :weight %>
+  </div>
+  <div class="field">
+    <%= f.label :desireWeight %><br>
+    <%= f.number_field :desireWeight %>
+  </div>
+  <div class="field">
+    <%= f.label :idealWeight %><br>
+    <%= f.number_field :idealWeight %>
+  </div>
+  <div class="field">
+    <%= f.label :home_id %><br>
+    <%= f.number_field :home_id %>
+  </div>
+  <div class="field">
+    <%= f.label :weightPointId %><br>
+    <%= f.number_field :weightPointId %>
+  </div>
+  <div class="field">
+    <%= f.label :dietTypeId %><br>
+    <%= f.number_field :dietTypeId %>
+  </div>
+  <div class="field">
+    <%= f.label :weightCurveId %><br>
+    <%= f.number_field :weightCurveId %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,35 @@
+<h1>Inscription</h1>
+
+<%= render 'create_form' %>
+
+
+<script>
+  $(document).ready(function() {
+    nextButtonStep2();
+    $( "#datepicker" ).datepicker({ firstDay: 1,
+      defaultDate: "-30y",
+      changeYear: true,
+      navigationAsDateFormat: true,
+      dayNamesMin: [ "Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa" ],
+      monthNames: [ "Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
+    "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre" ] });
+    $("#user_password_confirmation").change(function(){
+      var ret = samePasswords();
+      nextButtonStep1(ret);
+    });
+    $("#user_password").change(function(){
+      var ret = samePasswords();
+      nextButtonStep1(ret);
+    });
+    $("#user_username").change(function(){
+      var ret = samePasswords();
+      nextButtonStep1(ret);
+    });
+    $("#user_mail").change(function(){
+      var ret = samePasswords();
+      nextButtonStep1(ret);
+    });
+    $("#user_firstname").change(function(){nextButtonStep2()});
+    $("#user_lastname").change(function(){nextButtonStep2()});
+  });
+</script>

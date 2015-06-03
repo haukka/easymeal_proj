@@ -1,0 +1,53 @@
+
+<h1>
+  <%= @disease.name %>
+</h1>
+
+<div class="row">
+
+<div class="col-md-6">
+  <div class="table-responsive" style="height: 420px; overflow: auto;">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+	<th style="text-align: center;">
+	  Aliments autorisés
+	</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @disease.big_quantity.each do |big| %>
+      <tr>
+	<td >
+          <%= big.name %>
+	</td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="col-md-6">
+  <div class="table-responsive"  style="height: 420px; overflow: auto;">
+    <table class="table table-bordered">
+      <tr>
+	<th style="text-align: center;">
+	  Aliments interdits
+	</th>
+      </tr>
+      <% @disease.forbid.each do |forbid| %>
+      <tr>
+	<td >
+          <%= forbid.name %>
+	</td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+</div>
+
+<br />
+<%= link_to 'Retour', diet_types_path, class: "btn btn-danger" %>

@@ -1,0 +1,11 @@
+<h1>Liste des utilisateurs</h1>
+
+<% if @errors.count > 0 %>
+  <div class="alert alert-danger">
+    <% @errors.each do |error| %>
+      <%= error.capitalize %>
+    <% end %>
+  </div>
+<% end %>
+
+<%= link_to 'Nouvel utilisateur', new_user_path %>

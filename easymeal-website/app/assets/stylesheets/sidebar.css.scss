@@ -1,0 +1,128 @@
+$darkGreen:   #17411a;
+$green:       #328d39;
+$fluoGreen:   #4eda57;
+$lightGreen:  #8cf292;
+$veryLightGreen:  #ccf8ce;
+$darkGreen: #17411a;
+
+#sidebar-small {
+    width: 40px;
+    height: 100%;
+    position: relative;
+    left: 0;
+    top: 0;
+}
+
+#sidebar
+{
+  margin: -15px -30px -15px 0;
+  a
+  {
+    display: block;
+    -webkit-transform: rotate(90deg);
+    -webkit-transform-origin: left top;
+    -moz-transform: rotate(90deg);
+    -moz-transform-origin: left top;
+    -ms-transform: rotate(90deg);
+    -ms-transform-origin: left top;
+    -o-transform: rotate(90deg);
+    -o-transform-origin: left top;
+    transform: rotate(90deg);
+    transform-origin: left top;
+    position: relative;
+    width: 187px;
+    left: 100%;
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 15px 0;
+  }
+  #general
+  {
+    background-color: $fluoGreen;
+    border-top-left-radius: 10px;
+  }
+  #alimentation
+  {
+    top: 129px;
+    background-color: $green;
+  }
+  #health
+  {
+    top: 258px;
+    background-color: $darkGreen;
+    border-top-right-radius: 10px;
+  }
+}
+
+.general
+{
+  display: block;
+  -webkit-transform: rotate(90deg);
+  -webkit-transform-origin: left top;
+  -moz-transform: rotate(90deg);
+  -moz-transform-origin: left top;
+  -ms-transform: rotate(90deg);
+  -ms-transform-origin: left top;
+  -o-transform: rotate(90deg);
+  -o-transform-origin: left top;
+  transform: rotate(90deg);
+  transform-origin: left top;
+  position: relative;
+  margin: -174px 0 0 -58px;
+  width: 561px;
+  left: 100%;
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+  padding: 15px 0;
+  background-color: $fluoGreen;
+}
+
+.health
+{
+  display: block;
+  -webkit-transform: rotate(90deg);
+  -webkit-transform-origin: left top;
+  -moz-transform: rotate(90deg);
+  -moz-transform-origin: left top;
+  -ms-transform: rotate(90deg);
+  -ms-transform-origin: left top;
+  -o-transform: rotate(90deg);
+  -o-transform-origin: left top;
+  transform: rotate(90deg);
+  transform-origin: left top;
+  position: relative;
+  margin: -174px 0 0 -58px;
+  width: 561px;
+  left: 100%;
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+  padding: 15px 0;
+  background-color: $darkGreen;
+}
+
+.alimentation
+{
+  display: block;
+  -webkit-transform: rotate(90deg);
+  -webkit-transform-origin: left top;
+  -moz-transform: rotate(90deg);
+  -moz-transform-origin: left top;
+  -ms-transform: rotate(90deg);
+  -ms-transform-origin: left top;
+  -o-transform: rotate(90deg);
+  -o-transform-origin: left top;
+  transform: rotate(90deg);
+  transform-origin: left top;
+  position: relative;
+  margin: -174px 0 0 -58px;
+  width: 561px;
+  left: 100%;
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+  padding: 15px 0;
+  background-color: $green;
+}

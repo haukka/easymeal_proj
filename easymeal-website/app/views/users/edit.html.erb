@@ -1,0 +1,199 @@
+<div id="sidebar">
+  <a id="general" href="#">G&eacute;n&eacute;ral</a>
+  <a id="alimentation" href="/allergen_and_favorite_aliments">Alimentation</a>
+  <a id="health" href="/diet_types">Santé</a>
+  <div class="general"></div>
+</div>
+
+<div id="page" style="margin-top: -10px">
+<div class="col-md-11">
+  <h1>Profil</h1>
+</div>
+
+  <div class="row">
+    <div class="col-md-3 center">
+      <div class="inside bordered" style="height: 207px;">
+        <h2>Photo</h2>
+      </div>
+    </div>
+    <div class="col-md-8 center" style="padding-left: 0px;">
+      <div class="inside bordered filled" style="height: 207px;">
+        <h2>Informations</h2>
+        <%= form_for @user, remote: true do |f| %>
+        
+          <% if @user.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+              <ul>
+              <% @user.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="row">
+            <div class="field col-md-4">
+              <%= f.label :firstname %><br>
+              <%= f.text_field :firstname, onkeyup: "$(this).parent().submit();", class:"white" %>
+            </div>
+            
+            <div class="field col-md-4">
+              <%= f.label :lastname %><br>
+              <%= f.text_field :lastname, onkeyup: "$(this).parent().submit();", class:"white" %>
+            </div>
+            
+            <div class="field col-md-4">
+              <%= f.label :username %><br>
+              <%= f.text_field :username, onkeyup: "$(this).parent().submit();", class:"white" %>
+            </div>
+          </div>
+          <div class="row" style="margin: 15px 0;">
+            <div class="field col-md-12" id="home_details">
+              <% if @user.home %>
+                Vous faite partie du foyer <%= @home.name %>.
+                Vous souhaitez en changer ?
+                <button class="btn btn-success" data-toggle="modal" data-target="#home_modal" style="margin-left: 10px;">
+                  Choisir un nouveau foyer
+                </button>
+              <% else %>
+                Vous n'avez pas de foyer rattaché.
+                <button class="btn btn-success" data-toggle="modal" data-target="#home_modal" style="margin-left: 10px;">
+                  Cr&eacute;er un foyer
+                </button>
+                
+                
+                
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    
+    <%= form_for @user, remote: true, :html => { :id => "password_form" } do |f| %>
+      <% if @user.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+            <ul>
+            <% @user.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+            </ul>
+          </div>
+      <% end %>
+      <div class="col-md-8" style="margin-top: 20px">
+          <div class="inside bordered filled" style="height: 200px;">
+            <h2>Sécurité</h2>
+              <div class="row">
+                
+                <div class="field col-md-12">
+                  <%= f.label :email %><br>
+                  <%= f.text_field :email, onkeyup: "$('#user_password').val('');$('#user_password_confirmation').val('');$(this).parent().submit();", class:"white" %>
+                </div>
+              </div>
+          
+              <div class="row">
+
+                <div class="field col-md-6">
+                  <%= f.label "Nouveau mot de passe" %><br>
+                  <%= f.password_field :password, class:"white", id: "user_password" %>
+                </div>
+          
+                <div class="field">
+                  <%= f.label "Confirmation du mot de passe" %><br>
+                  <%= f.password_field :password_confirmation, class:"white", id: "user_password_confirmation" %>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="col-md-3" style="margin-top: 20px;padding-left: 0px;">
+          <div class="inside bordered" style="padding-bottom: 20px;height: 200px;">
+            <h2>Validation</h2>
+            <p style="font-style: italic;line-height: 14px;">Uniquement en cas de changement du mot de passe.</p>
+            <%= f.submit "Envoyer", class: "btn btn-success disabled", style: "margin-top: 30px;", id: "submit_button", onclick:"$('#password_form').submit();password_success()" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+  $(document).ready(function() {
+    $("#user_password_confirmation").keyup(function(){
+      if (samePasswords() && passwordValid())
+        $("#submit_button").removeClass("disabled");
+      else
+        $("#submit_button").addClass("disabled");
+    });
+    $("#user_password").keyup(function(){
+      if (samePasswords() && passwordValid())
+        $("#submit_button").removeClass("disabled");
+      else
+        $("#submit_button").addClass("disabled");
+    });
+    window.currentUser = {
+            token : "<%= current_user.auth_token %>"
+        }
+  });
+</script>
+
+<div class="modal fade" id="home_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_for @home, remote: true do |f| %>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">Choix d'un foyer</h4>
+        </div>
+        <div class="modal-body" style="text-align: center;">
+
+          <% if @home.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+              <ul>
+              <% @user.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+          
+          <div class="field">
+            <%= f.label :name %><br>
+            <%= f.text_field :name %>
+          </div>
+          
+          <div class="field">
+            <%= f.label :street %><br>
+            <%= f.text_field :street %>
+          </div>
+          
+          <div class="field">
+            <%= f.label :zipcode %><br>
+            <%= f.text_field :zipcode %>
+          </div>
+          
+          <div class="field">
+            <%= f.label :city %><br>
+            <%= f.text_field :city %>
+          </div>
+          
+       
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <%= f.submit "Envoyer", class: "btn btn-success", onclick: "searchHomes();return false;" %>
+        </div>
+       <% end %>
+    </div>
+  </div>
+</div>
+<div>

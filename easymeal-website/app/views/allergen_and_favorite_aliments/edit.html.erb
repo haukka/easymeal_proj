@@ -1,0 +1,80 @@
+<h1>Préférences concernant l'aliment</h1>
+
+  <div class="panel panel-success">
+    <div class="panel-heading"><%= @allergen_and_favorite_aliment.aliment.name %></div>
+    <div class="panel-body">
+      <br />
+      <div>
+	<% if @allergen_and_favorite_aliment.allergy == true && %>
+	<p>Vous êtes allergique à cet aliment</p>
+	<% else %>
+	<p>Vous n'êtes pas allergique à cet aliment</p>
+	<% end %>
+      </div>
+      <div>
+	<% if @allergen_and_favorite_aliment.favori == true %>
+	<p>Vous aimez cet aliment</p>
+	<% else %>
+	<p>Vous n'aimez pas cet aliment</p>
+	<% end %>
+      </div>
+      <br />
+      <div>
+	<%= link_to 'Retour', allergen_and_favorite_aliments_path, :class => "btn btn-danger" %>
+	<%= link_to 'Supprimer', allergen_and_favorite_aliment_path, method: :delete, data: { confirm: 'Etes vous sure?' }, :class => "btn btn-danger"  %>
+      </div>
+      <br />
+      <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+	Modifier vos préférences
+      </button>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_for @allergen_and_favorite_aliment do |f| %>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Modifier une préférence alimentaire</h4>
+      </div>
+      <div class="modal-body">
+	<% if @allergen_and_favorite_aliment.errors.any? %>
+	<div id="error_explanation">
+	  <h2><%= pluralize(@allergen_and_favorite_aliment.errors.count, "error") %> prohibited this allergen_and_favorite_aliment from being saved:</h2>
+	  
+	  <ul>
+	    <% @allergen_and_favorite_aliment.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+	    <% end %>
+	  </ul>
+	</div>
+	<% end %>
+	<div class="field">
+	  <%= f.label :allergy %><br />
+	  <%= f.label :allergy, "Oui", :value => "true"  %>
+	  <%= f.radio_button :allergy, true %>
+	  <%= f.label :allergy, "Non", :value => "false" %>
+	  <%= f.radio_button :allergy, false, :checked => true %>
+	</div>
+	<div class="field">
+	  <%= f.label :favori, 'Aliment favori ou pas aimé '%><br />
+	  <%= f.label :favori, "Favori", :value => "true"  %>
+	  <%= f.radio_button :favori, true %>
+	  <%= f.label :favori, "Pas aimé", :value => "false" %>
+	  <%= f.radio_button :favori, false, :checked => true %>
+	</div>
+      </div>
+      <div class="modal-footer">
+	<button type="button" class="btn btn-danger" data-dismiss="modal">Retour</button>
+	<%= f.submit "Valider", class: "btn btn-large btn-success" %>
+	<% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+
+

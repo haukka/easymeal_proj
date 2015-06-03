@@ -1,0 +1,35 @@
+// Place all the styles related to the Home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$darkGreen:   #17411a;
+$green:       #328d39;
+$fluoGreen:   #4eda57;
+$lightGreen:  #8cf292;
+$veryLightGreen:  #ccf8ce;
+
+.widget
+{
+  padding: 0;
+  .widget_content
+  {
+    background-color: white;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    opacity: 0.8;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+  .title
+  {
+    background-color: $fluoGreen;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    color: white;
+    text-align: center;
+    font-size: 23px;
+    padding: 5px 0;
+  }
+}

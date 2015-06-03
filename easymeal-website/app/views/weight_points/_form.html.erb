@@ -1,0 +1,27 @@
+<%= form_for(@weight_point) do |f| %>
+  <% if @weight_point.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@weight_point.errors.count, "error") %> prohibited this weight_point from being saved:</h2>
+
+      <ul>
+      <% @weight_point.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :weight, 'Entrer votre poids' %><br>
+    <%= f.number_field :weight %>
+    <div id="weight_error" class="hidden">Veuillez ajouter votre poids.</div>
+  </div>
+  <div class="field">
+    <%= f.label :date, 'Date' %><br>
+    <%= f.text_field :date, class: "datepicker" %>
+    <div id="date_error" class="hidden">Veuillez ajouter une date.</div>
+  </div>
+  <div class="actions">
+    <%= f.submit "Ajouter", class: "btn btn-large btn-success" %>
+  </div>
+<% end %>

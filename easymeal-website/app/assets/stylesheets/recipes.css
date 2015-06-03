@@ -1,0 +1,55 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+div#name_error, div#price_error, div#calorie_error, div#difficulty_error, div#time_error, div#prep_error {
+  background-color: #fea5a5;
+  border: solid 1px;
+  border-color: #fa5a5a;
+  width: 300px;
+  float: right;
+  margin: -5px 40px 0 -50%;
+  padding: 5px 5px 5px 5px;
+}
+
+.modal .modal-body {
+    max-height: 420px;
+    overflow-y: auto;
+}
+
+input[type="text1"], input[type="text"].white2, input[type="number"].white2, textarea.white2 {
+  line-height: 20px;
+  font-size: 14px;
+  color: #555555;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+}
+
+input[type="text1"], input[type="text"].white2, input[type="number"].white2, textarea.white2{
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+    -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+    -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+    transition: border linear 0.2s, box-shadow linear 0.2s;
+}
+
+input[type="text1"]:focus, input[type="text"].white2:focus, input[type="number"].white2:focus, textarea.white2:focus {
+  border-color: rgba(82, 168, 236, 0.8);
+  outline: 0;
+  outline: thin dotted \9;
+  /* IE6-9 */
+
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+}
+
+.underline:focus, .underline:hover {
+    text-decoration: underline;
+}

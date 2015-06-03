@@ -1,0 +1,100 @@
+<div class="row">
+  <h1>Recette</h1>
+  <div style="height: 140px; border-radius: 7px; background: #4eda57;">
+    <h2 style="color: white; padding-top: 10px">Recherche</h2>
+    <div class="ui-widget field event" style="margin-top: 20px; text-align: left; padding-left:20px">
+      <%= form_tag(recipes_path, :method => "get", id: "search-form") do %>      <%= text_field_tag :search, params[:search], {class: "search_bar", type: "text1", style: "width:950px; height: 40px;"} %>
+      <%= button_tag(type: "submit", class: "btn btn-default", style: "height: 40px; border-radius: 6px; margin-top: -10px;") do %>
+      <span style="color: #4eda57;"> OK</span>
+      <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="inside bordered" style="height: 280px; margin-top: 20px;">
+    <h2>Recettes suggérées</h2>
+      <%= link_to image_tag("recipe/" + @rand_id.to_s + ".png", :style => "height:180px; width: 270px; border-radius: 6px;"), :action => 'show', :id => @rand_id %>
+      <%= link_to image_tag("recipe/" + @rand_id2.to_s + ".png", :style => "height:180px; width: 270px; margin-left: 20px; margin-right: 20px; border-radius: 6px;"), :action => 'show', :id => @rand_id %>
+      <%= link_to image_tag("recipe/" + @rand_id3.to_s + ".png", :style => "height:180px; width: 270px; border-radius: 6px;"), :action => 'show', :id => @rand_id %>
+      <div style="text-align: right; margin-right: 100px;">
+	<br />
+	<%= link_to '>> toutes les recettes', :action => 'index' %>
+	<!-- <button data-toggle="modal" data-target="#myModal" class="underline" style="border: none; background: none; outline:none;">
+  >> Ajouter une recette
+      </button> -->
+      </div>
+  </div>
+</div>
+</div>
+
+<script>
+  $(document).ready(function(){
+  valid_textarea();
+  change_name();
+  change_time();
+  change_price();
+  change_difficulty();
+  change_prep();
+  change_calorie();
+  });
+</script>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_for @recipe, :html => { :multipart => true } do |f| %>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Ajouter une recette</h4>
+      </div>
+      <div class="modal-body">
+	<% if @recipe.errors.any? %>
+	<div id="error_explanation">
+	  <h2><%= pluralize(@recette.errors.count, "error") %> prohibited this recipe from being saved:</h2>
+	  <ul>
+	    <% @recipe.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+	    <% end %>
+	  </ul>
+	</div>
+	<% end %>
+	<div class="field">
+	  <%= f.label 'Nom' %><br />
+	  <%= f.text_field :name, class:"white2", id:"name" %>
+	  <div id="name_error" class="hidden">Veuillez ajouter le nom de la recette.</div>
+	</div>
+	<div class="field">
+	  <%= f.label 'Temps estimés' %><br />
+	  <%= f.number_field :time, class:"white2", id:"time" %>
+	  <div id="time_error" class="hidden">Veuillez ajouter le temps estimés.</div>
+	</div>
+	<div class="field">
+	  <%= f.label 'Difficulté' %><br />
+	  <%= f.number_field :difficulty, class:"white2", id:"difficulty" %>
+	  <div id="difficulty_error" class="hidden">Veuillez ajouter la difficulté.</div>
+	</div>	  
+	<div class="field">
+	  <%= f.label 'Nb calories' %><br />
+	  <%= f.number_field :calories, class:"white2", id: "calorie" %>
+	  <div id="calorie_error" class="hidden">Veuillez ajouter le nb de calories.</div>
+	</div>	  
+	<div class="field">
+	  <%= f.label 'Prix' %><br />
+	  <%= f.number_field :price, class:"white2",id:"price" %>
+	  <div id="price_error" class="hidden">Veuillez ajouter le prix.</div>
+	</div>	  
+	<div class="field">
+	  <%= f.label 'Préparation' %><br />
+	  <%= f.text_area :text, class:"white2", id:"textprep" %>
+	  <div id="prep_error" class="hidden">Veuiller expliquer la préparation de la recette.</div>
+	</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Retour</button>
+	<%= f.submit "Ajouter", class: "btn btn-large btn-success" %>
+	<% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div>

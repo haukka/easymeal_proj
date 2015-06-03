@@ -1,0 +1,93 @@
+$darkGreen:     #17411a;
+$green:         #328d39;
+$fluoGreen:     #4eda57;
+$lightGreen:    #8cf292;
+$veryLightGreen: #ccf8ce;
+
+input[type="email"], input[type="text"], input[type="password"], , input[type="date"], input[type="number"], textarea
+{
+  background-color: #ccf8ce;
+  border: solid 1px;
+  border-color: $darkGreen;
+  text-align: center;
+}
+
+input[type="email"].white, input[type="text"].white, input[type="password"].white, input[type="date"].white, input[type="number"].white, textarea.white
+{
+  background-color: white;
+  border: none;
+  text-align: center;
+  color: $fluoGreen;
+  font-size: 18px;
+  padding: 5px;
+}
+
+form.sign_in
+{
+  .actions
+  {
+    margin-top: 50px;
+  }
+}
+
+div#step1
+{
+  .actions
+  {
+    margin-top: 100px;
+    #nextStep1button
+    {
+      margin-left: 50px;
+    }
+  }
+}
+
+div#step2
+{
+  .actions
+  {
+    margin-top: 130px;
+    text-align: center;
+    #nextStep2button
+    {
+      margin-left: 50px;
+    }
+  }
+}
+
+div#step3
+{
+  .actions
+  {
+    margin-top: 250px;
+    text-align: center;
+    #nextStep3button
+    {
+      margin-left: 50px;
+    }
+  }
+}
+
+div#password_error, div#weight_error, div#date_error, div#search_error
+{
+  background-color: #fea5a5;
+  border: solid 1px;
+  border-color: #fa5a5a;
+  width: 300px;
+  float: right;
+  margin: -5px 40px 0 -50%;
+  padding: 5px 5px 5px 5px;
+}
+
+form
+{
+  .field
+  {
+    margin-bottom: 5px;
+    label
+    {
+      font-size: 18px;
+      font-weight: 600;
+    }
+  }
+}

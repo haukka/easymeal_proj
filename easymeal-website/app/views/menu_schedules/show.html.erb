@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Weeknumber:</strong>
+  <%= @menu_schedule.weekNumber %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @menu_schedule.year %>
+</p>
+
+<p>
+  <strong>Home:</strong>
+  <%= @menu_schedule.home_id %>
+</p>
+
+<%= link_to 'Edit', edit_menu_schedule_path(@menu_schedule) %> |
+<%= link_to 'Back', menu_schedules_path %>

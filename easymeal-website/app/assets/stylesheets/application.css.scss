@@ -1,0 +1,189 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ *= require jquery.ui.datepicker
+ */
+
+@import "bootstrap";
+
+$darkGreen:   #17411a;
+$green:       #328d39;
+$fluoGreen:   #4eda57;
+$lightGreen:  #8cf292;
+$veryLightGreen:  #ccf8ce;
+
+body
+{
+  font-family:"Gill Sans";
+  color: #008000;
+  background-image: url('background.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-size: 12pt;
+  min-height: 100%;
+  color: $darkGreen;
+  a
+  {
+    color: #333;
+  }
+  a:hover
+  {
+    color: #333;
+    background: transparent;
+  }
+  h1
+  {
+    font-size: 32px;
+    color: $darkGreen;
+    margin-bottom: 15px;
+  }
+  h2
+  {
+    font-size: 27px;
+    color: $darkGreen;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  small
+  {
+      color: $darkGreen;
+  }
+}
+
+.navbar
+{
+  background-color: white;
+  border: none;
+  opacity: 0.86;
+  margin: auto auto;
+  margin-top: 2%;
+  width: 85%;
+  height: 70px;
+  .container-fluid
+  {
+    height: 100%;
+    .navbar-header
+    {
+      height: 100%;
+      a
+      {
+        height: 40px;
+        line-height: 40px;
+        font-size: 32px;
+        padding: 0px;
+        margin: 15px 15px 15px 15px;
+        color: $darkGreen;
+        img
+        {
+          height: 84%;
+          margin-top: -15px;
+        }
+      }
+      a:hover
+      {
+        color: $green;
+        img
+        {
+          opacity: 0.7;
+        }
+      }
+    }
+    .navbar-collapse
+    {
+      ul.navbar-nav
+      {
+        min-height: 70px;
+        -webkit-margin-before: 0px;
+        -webkit-margin-after: 0px;
+        -webkit-margin-start: 0px;
+        -webkit-margin-end: 0px;
+        -webkit-padding-start: 0px;
+        li
+        {
+          height: 70px;
+          a
+          {
+            height: 70px;
+            line-height: 40px;
+            color: $darkGreen;
+            font-size: 24px;
+          }
+          a:hover
+          {
+            color: $green;
+          }
+        }
+      }
+    }
+
+  }
+}
+
+.content
+{
+  background-color: white;
+  border-radius: 10px;
+  opacity: 0.8;
+  margin: auto auto;
+  margin-top: 2%;
+  width: 85%;
+  padding: 15px 30px 15px 30px;
+  text-align: center;
+  min-height: 560px;
+}
+
+.content_recipe
+{
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  margin: auto auto;
+  margin-top: 2%;
+  width: 85%;
+  padding: 15px 30px 15px 30px;
+  text-align: center;
+  min-height: 560px;
+}
+
+div.home_container
+{
+  margin: auto auto;
+  margin-top: 1%;
+  width: 85%;
+}
+
+.center
+{
+  text-align: center;
+}
+
+.bordered
+{
+  border: solid 2px $darkGreen;
+  border-radius: 8px;
+}
+
+.filled
+{
+  background-color: $veryLightGreen;
+}
+	
+.filledgreen
+{
+  color: white;	
+  background-color: $fluoGreen;
+}
+
+.flash
+{
+  width: 85%;
+  margin: 25px auto 0 auto;
+}

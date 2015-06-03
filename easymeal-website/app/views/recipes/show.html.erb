@@ -1,0 +1,51 @@
+<h1><%= @recipe.name %></h1>
+
+<div class="row">
+  <div class="col-md-3">
+    <%= image_tag "recipe/" + @recipe.id.to_s + ".png", :class=>"bordered", :style => "border-radius: 6px;", :id => "image" %>
+  </div>
+  <div class="col-md-9">
+    <div class="panel panel-success">
+      <div class="panel-heading">Réalisation</div>
+      <div class="panel-body">
+	<p>Temps estimés : <%= @recipe.time %> min</p>
+	<p>Difficulté : <%= @recipe.difficulty %></p>
+	<% if @recipe.calories == nil %>
+	<p>Nombre de calories : Non connu</p>
+	<% else %>
+	<p>Nombre de calories : <%= @recipe.calories %> </p>
+	<% end %>
+	<p>Préparation : </p>
+	<div style="text-align: left;">
+    <%= @recipe.text.html_safe %>
+  </div>
+	<p id="preptable"> Ingrédients :</p>
+	<div class="col-md-6" style="overflow:auto; margin-left: 200px;">
+	  <table class="table table-bordered" id="table">
+	    <tr>
+	      <th>Quantité</th>
+	      <th>Aliments</th>
+	    </tr>
+	    <% @recipe.aliments_quantity.each do |alim| %>
+	    <tr>
+	      <th><%= alim.quantity %></th>
+	      <th> <%= alim.aliment.name %></th>
+	    </tr>
+	    <% end %>
+	  </table>
+	</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= link_to 'Retour', :back, :class => "btn btn-danger" %>
+
+<script>
+  $(document).ready(function(){
+  show_table();
+  $("#image").error(function(){
+  $(this).hide();
+  });
+  });
+</script>
