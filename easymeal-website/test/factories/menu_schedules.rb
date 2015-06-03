@@ -1,22 +1,20 @@
+# -*- encoding : utf-8 -*-
 # == Schema Information
 #
 # Table name: menu_schedules
 #
 #  id         :integer          not null, primary key
-#  weekNumber :integer
-#  year       :integer
 #  home_id    :integer
 #  created_at :datetime
 #  updated_at :datetime
-#  day        :integer
 #  meal       :integer
+#  date       :date
 #
 
 FactoryGirl.define do
   factory :menu_schedule do
-    weekNumber 1
-    year 2014
-    day 7
-    meal 2
+    home_id 1
+    meal 0
+    date "2014-12-03"
   end
 end

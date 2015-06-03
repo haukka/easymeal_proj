@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class RenameFibresToFibersInAliments < ActiveRecord::Migration
   def up
     rename_column :aliments, :fibres, :fiber

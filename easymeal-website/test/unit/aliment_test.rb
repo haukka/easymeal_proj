@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # == Schema Information
 #
 # Table name: aliments
@@ -51,11 +52,6 @@ class AlimentTest < ActiveSupport::TestCase
   test "aliment invalid without a category" do
     aliment = FactoryGirl.build(:aliment, categories: [])
     assert !aliment.valid?, "An aliment must have a category."
-  end
-  
-  test "aliment valid without a home" do
-    aliment = FactoryGirl.build(:aliment, categories: [@category], home: [])
-    assert aliment.valid?, "An aliment must be valid without a home."
   end
   
   test "aliment invalid without a price" do

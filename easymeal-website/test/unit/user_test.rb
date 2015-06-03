@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # == Schema Information
 #
 # Table name: users
@@ -38,6 +39,11 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
+#  photo_file_name        :string(255)
+#  photo_content_type     :string(255)
+#  photo_file_size        :integer
+#  photo_updated_at       :datetime
+#  isAdmin                :boolean          default(FALSE)
 #
 
 require 'test_helper'
@@ -85,12 +91,12 @@ class UserTest < ActiveSupport::TestCase
 
   test "user valid without a birth date" do
      user = FactoryGirl.build(:user, birth: nil)
-    assert user.valid?, "user should be valid without a birth date"
+    assert !user.valid?, "user should be invalid without a birth date"
   end
 
-  test "user valid without aheight" do
+  test "user valid without a height" do
      user = FactoryGirl.build(:user, height: nil)
-    assert user.valid?, "user should be valid without a height"
+    assert !user.valid?, "user should be invalid without a height"
   end
 
   test "user valid without a weight" do

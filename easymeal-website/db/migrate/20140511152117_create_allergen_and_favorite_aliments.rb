@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateAllergenAndFavoriteAliments < ActiveRecord::Migration
   def change
     create_table :allergen_and_favorite_aliments do |t|

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateModerates < ActiveRecord::Migration
   def change
     create_table :moderates do |t|

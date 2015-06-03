@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateExceeds < ActiveRecord::Migration
   def change
     create_table :exceeds do |t|

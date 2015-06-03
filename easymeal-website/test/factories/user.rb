@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 FactoryGirl.define do
   factory :user do
     username  "superToto"
@@ -12,5 +13,6 @@ FactoryGirl.define do
     loginAttempts 0
     lock          nil
     islock        false
+    height      177
   end
 end

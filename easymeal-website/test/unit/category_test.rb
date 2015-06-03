@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # == Schema Information
 #
 # Table name: categories
@@ -18,7 +19,7 @@ class CategoryTest < ActiveSupport::TestCase
   	assert category.valid?
 	end
   
-	test "category invlid without name" do
+	test "category invalid without name" do
 		category = FactoryGirl.build(:category, name: nil)
 		assert !category.valid?, "A category must have a name."
 	end

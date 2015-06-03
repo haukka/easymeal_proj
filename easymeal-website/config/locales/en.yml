@@ -20,4 +20,15 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  action:
+    print: Print
+    planning_generation: Automatic generation
+    send: Send
+    cancel: Cancel
+  title:
+    recipe_search: Search a recipe
+  alert:
+    empty: Empty
+    planning:
+      associate_recipe_success: Your recipe has successfully been added.
+  

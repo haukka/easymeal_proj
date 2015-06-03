@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateStores < ActiveRecord::Migration
   def change
     create_table :stores do |t|

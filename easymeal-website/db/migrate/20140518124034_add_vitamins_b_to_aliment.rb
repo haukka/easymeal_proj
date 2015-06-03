@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddVitaminsBToAliment < ActiveRecord::Migration
   def up
     add_column :aliments, :vitaminB2, :float

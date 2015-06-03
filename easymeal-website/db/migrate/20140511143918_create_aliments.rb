@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateAliments < ActiveRecord::Migration
   def change
     create_table :aliments do |t|

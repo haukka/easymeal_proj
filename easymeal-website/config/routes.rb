@@ -1,19 +1,47 @@
+# -*- encoding : utf-8 -*-
 EasymealWebsite::Application.routes.draw do
   
-  devise_for :users
+  namespace :admin do
+    get "/", to: "dashboard#index", as: "dashboard_index"
+    get "/recipes", to: "recipes#index", as: "recipes"
+    get "/recipes/:id", to: "recipes#show", as: "recipe"
+    post "/recipes/:id/validate", to: "recipes#validate", as: "recipe_validate"
+    post "/recipes/:id/refuse", to: "recipes#refuse", as: "recipe_refuse"
+  end
+  
+  resources :stocks
+  post "/stock_alim", to: "stocks#associate_to_stock", as: "associate_to_stock"
+  post "/stock_reinit", to: "stocks#reinit_stock", as: "reinit_stock"
+  post "/stock_alim_remove", to: "stocks#remove_alim_stock", as: "remove_alim_stock"
+  post "/stock_alim_update", to: "stocks#stock_alim_update", as: "stock_alim_update"
+
+  devise_for :users, controllers: { registrations: 'registrations' }
   resources :allergen_and_favorite_aliments
 
   resources :categories, except: [:destroy, :edit, :update, :create, :new] 
 
-  resources :recipes
+  # resources :recipes
+  resources :recipes do
+    get :autocomplete_aliment_name, :on => :collection
+  end
+  get "/aliments/pending_recipes", to: "recipes#pendingRecipes"
 
   resources :aliments, except: [:destroy, :new, :create]
+  get "/aliments/search", to: "aliments#search", as: "get_searched_aliments"
 
   resources :shopping_lists
+  post "/shopping_lists_alim", to: "shopping_lists#associate_to_shopping_lists", as: "associate_to_shopping_lists"
+  post "/shopping_lists_alim_reinit", to: "shopping_lists#reinit_shopping_lists", as: "reinit_shopping_lists"
+  post "/shopping_lists_alim_remove", to: "shopping_lists#remove_alim_list", as: "remove_alim_list"
+  post "/shopping_lists_alim_update", to: "shopping_lists#alim_list_update", as: "alim_list_update"
+  post "/shopping_lists_alim_validate", to: "shopping_lists#alim_list_validate", as: "alim_list_validate"
 
   resources :stores
 
-  resources :menu_schedules
+  resources :menu_schedules, only: [:index, :planning_generation]
+  post "/menu_schedule/planning_generation", to: "menu_schedules#planning_generation", as: "menu_schedule_planning_generation"
+  post "/menu_schedule/associate", to: "menu_schedules#associate", as: "menu_schedule_associate"
+  post "/menu_schedule/dissociate", to: "menu_schedules#dissociate", as: "menu_schedule_dissociate"
 
   resources :homes
 
@@ -23,7 +51,7 @@ EasymealWebsite::Application.routes.draw do
 
   resources :diseases
 
-  resources :users, except: [:new, :destroy, :edit]
+  resources :users, except: [:new, :destroy, :edit, :index, :create]
 
   get "/users/:id/edit/general", to: "users#edit", as: "edit_user"
   
@@ -41,59 +69,9 @@ EasymealWebsite::Application.routes.draw do
   get "/index(.:format)", to: "home#index"
   
   post "/session/create", to: "sessions#create"
+
+  get "downloads/documentation_utilisateur"
   
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+  get "downloads/documentation_technique"
 
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
-
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
 end

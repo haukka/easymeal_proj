@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class RemoveUserIdFromDietType < ActiveRecord::Migration
   def change
     remove_column :diet_types, :user_id, :integer

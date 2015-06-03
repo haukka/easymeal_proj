@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class RemoveVitaminAFromAliments < ActiveRecord::Migration
   def up
     remove_column :aliments, :vitaminA

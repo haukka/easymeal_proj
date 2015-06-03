@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateMenuSchedules < ActiveRecord::Migration
   def change
     create_table :menu_schedules do |t|

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateJoinTableAlimentHome < ActiveRecord::Migration
   def change
     create_join_table :aliments, :homes do |t|

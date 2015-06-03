@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddNameToRecipes < ActiveRecord::Migration
   def up
     add_column :recipes, :name, :string

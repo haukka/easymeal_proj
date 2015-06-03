@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateWeightPoints < ActiveRecord::Migration
   def change
     create_table :weight_points do |t|

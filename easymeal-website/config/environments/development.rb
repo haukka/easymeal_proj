@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 EasymealWebsite::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -30,6 +31,8 @@ EasymealWebsite::Application.configure do
   config.action_mailer.delivery_method = :smtp
 
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+  config.i18n.available_locales = ['fr', :en]
 
   config.action_mailer.smtp_settings = {
     :address              => ENV["MAIL_ADDR"],

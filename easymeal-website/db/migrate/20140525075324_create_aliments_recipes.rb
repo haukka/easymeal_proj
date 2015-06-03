@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateAlimentsRecipes < ActiveRecord::Migration
   def change
     create_table :aliments_recipes do |t|

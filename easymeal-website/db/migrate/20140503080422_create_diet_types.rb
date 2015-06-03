@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateDietTypes < ActiveRecord::Migration
   def change
     create_table :diet_types do |t|

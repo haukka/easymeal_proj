@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddHouseholderToHome < ActiveRecord::Migration
   def up
     add_column :homes, :householder_id, :integer

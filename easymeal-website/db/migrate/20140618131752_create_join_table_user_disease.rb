@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateJoinTableUserDisease < ActiveRecord::Migration
   def change
     create_join_table :users, :diseases do |t|

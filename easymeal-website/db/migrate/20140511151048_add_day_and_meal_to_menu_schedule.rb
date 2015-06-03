@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddDayAndMealToMenuSchedule < ActiveRecord::Migration
   def up
     add_column :menu_schedules, :day, :integer

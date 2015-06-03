@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddFavoriToAllergenAndFavoriteAliments < ActiveRecord::Migration
   def up
     add_column :allergen_and_favorite_aliments, :favori, :boolean
