@@ -49,8 +49,8 @@
   <br>
   <div class="row">
     <div class="col-md-11">
-      <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-	Ajouter une préférence pour les aliments
+      <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">
+	Ajouter
       </button>
     </div>
   </div>
@@ -60,8 +60,8 @@
 <script>
   $(document).ready(function() {
   completion();
-  valid_submit();
-  empty_div();
+  valid_submit_fav();
+  empty_div_fav();
   });
 
 </script>
@@ -91,7 +91,7 @@
 	  <div id="search_error" class="hidden">Veuillez choisir un aliment</div>
 	</div>
 	<div class="field">
-	  <%= f.label :allergy %><br />
+	  <%= f.label t("activerecord.models.allergy") %><br />
 	  <%= f.label :allergy, "Oui", :value => "true"  %>
 	  <%= f.radio_button :allergy, true %>
 	  <%= f.label :allergy, "Non", :value => "false" %>

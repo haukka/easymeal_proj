@@ -1,31 +1,126 @@
-<h1>Listing menu_schedules</h1>
+<h1>Planning</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Weeknumber</th>
-      <th>Year</th>
-      <th>Home</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @menu_schedules.each do |menu_schedule| %>
-      <tr>
-        <td><%= menu_schedule.weekNumber %></td>
-        <td><%= menu_schedule.year %></td>
-        <td><%= menu_schedule.home_id %></td>
-        <td><%= link_to 'Show', menu_schedule %></td>
-        <td><%= link_to 'Edit', edit_menu_schedule_path(menu_schedule) %></td>
-        <td><%= link_to 'Destroy', menu_schedule, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<div id="sub-nav">
+  <div id="print" class="col-md-3">
+    <% link_to t("action.print"), "#" %>
+  </div>
+  
+  <div class="col-md-1">
+    <%= link_to menu_schedules_path(date: @week_begining.prev_day(7)) do %>
+      <span class="glyphicon glyphicon-chevron-left"></span>
     <% end %>
-  </tbody>
-</table>
+  </div>
+  
+  <div id="title" class="col-md-4">
+    Du <%= @week_begining.strftime("%e") %> <%= t("date.month." + @week_begining.strftime("%B")) %> au <%= @week_end.strftime("%e") %> <%= t("date.month." + @week_end.strftime("%B")) %>
+  </div>
+  
+  <div class="col-md-1">
+    <%= link_to menu_schedules_path(date: @week_end.next_day) do %>
+      <span class="glyphicon glyphicon-chevron-right"></span>
+    <% end %>
+  </div>
+  
+  <div id="generation" class="col-md-3">
+    <%= button_to t("action.planning_generation"), {:action => "planning_generation", data: {date: @week_begining}}, {:class => "buttonto"} %>
+    <% link_to t("action.planning_generation"), "menu_schedule_planning_generation_path" %>
+  </div>
+</div>
 
-<br>
+<div id="calendar">
+  <% for date in @week_begining..@week_end %>
+    <div class="planning_day">
+      <div class="day<% if date == @today %> today<% end %>">
+        <%= t("date.day." + date.strftime("%A")) %>
+      </div>
+      <div class="meals<% if date == @week_begining %> first<% end %><% if date == @week_end %> last<% end %><% if date == @today %> today<% end %>" id="<%= date %>">
+        
+          <% breakfast = @breakfasts.select{|l| l.date == date}.first unless @breakfasts.blank? %>
+          <div class="breakfast cadre_recipes <% unless breakfast %> center<% end %>">
+			  <div class="recipes">
+            <% if breakfast %>
+              <% breakfast.recipes.each do |recipe| %>
+                	<span data-token="<%= @user_token %>" data-user="<%= current_user.id %>" data-date="<%= date %>" data-meal="<%= MenuSchedule::MEALS::Breakfast.to_s %>" data-id="<%= recipe.id %>" class="recipe"><%= recipe.name.html_safe %></span>
+				
+              <% end %>
+            <% end %>
+			</div>
+	        <%= link_to "#", onmouseover: '$(this).find("span").removeClass("hidden");', onclick: "show_finder(" + MenuSchedule::MEALS::Breakfast.to_s + ", '" + date.to_s + "', '"+ @user_token +"', '" + current_user.id.to_s + "', 'breakfast');return false;", class: 'add_recipe' do %>
+			<span class="glyphicon glyphicon-plus"></span>
+			<% end %>
+          </div>
+		  
+          <% lunch = @lunchs.select{|l| l.date == date}.first unless @lunchs.blank? %>
+          <div class="lunch cadre_recipes <% unless lunch %> center<% end %>">
+			  <div class="recipes">
+            <% if lunch %>
+              <% lunch.recipes.each do |recipe| %>
+                	<span data-token="<%= @user_token %>" data-user="<%= current_user.id %>" data-date="<%= date %>" data-meal="<%= MenuSchedule::MEALS::Lunch.to_s %>" data-id="<%= recipe.id %>" class="recipe"><%= recipe.name.html_safe %></span>
+              <% end %>
+            <% end %>
+			</div>
+	        <%= link_to "#", onmouseover: '$(this).find("span").removeClass("hidden");', onclick: "show_finder("+MenuSchedule::MEALS::Lunch.to_s+", '" + date.to_s + "', '"+ @user_token +"', '" + current_user.id.to_s + "', 'lunch');return false;", class: 'add_recipe' do %>
+			<span class="glyphicon glyphicon-plus"></span>
+			<% end %>
+          </div>
+       
+          <div class="dinner cadre_recipes <% unless @dinners.any? %> center<% end %>">
+            <% dinner = @dinners.select{|l| l.date == date}.first unless @dinners.blank? %>
+			<div class="recipes">
+            <% if dinner %>
+              <% dinner.recipes.each do |recipe| %>
+                	<span data-token="<%= @user_token %>" data-user="<%= current_user.id %>" data-date="<%= date %>" data-meal="<%= MenuSchedule::MEALS::Dinner.to_s %>" data-id="<%= recipe.id %>" class="recipe"><%= recipe.name.html_safe %></span>
+              <% end %>
+            <% end %>
+			</div>
+	        <%= link_to "#", onmouseover: '$(this).find("span").removeClass("hidden");', onclick: "show_finder("+MenuSchedule::MEALS::Dinner.to_s+", '" + date.to_s + "', '"+ @user_token +"', '" + current_user.id.to_s + "', 'diner');return false;", class: 'add_recipe' do %>
+			<span class="glyphicon glyphicon-plus"></span>
+			<% end %>
+          </div>
+      </div>
+    </div>
+  <% end %>
+  <div class="clearfix"></div>
+</div>
 
-<%= link_to 'New Menu schedule', new_menu_schedule_path %>
+<div class="modal fade" id="planningModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel"><%= t("title.recipe_search") %></h4>
+      </div>
+      <div class="modal-body">
+        <div id="search">
+
+        </div>
+        <div id="result">
+          <div id="count"></div>
+          <div id="carousel" class="owl-carousel">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$( document ).ready(function()
+{
+  $('#planningModal').on('hidden.bs.modal', function ()
+  {
+    empty_carousel();
+  });
+  
+  $('.recipe').hover(function() {
+    $( this ).append( $( "<span class='glyphicon glyphicon-remove'></span>" ) );
+  }, function() {
+    $( this ).find( "span.glyphicon" ).remove();
+  });
+  
+  $('.recipe').click(function() {
+	  dissociate($(this));
+  });
+  
+});
+</script>

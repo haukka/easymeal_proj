@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class DietTypesController < ApplicationController
   before_action :set_diet_type, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate
@@ -5,7 +6,6 @@ class DietTypesController < ApplicationController
 
   # GET /diet_types
   # GET /diet_types.json
-
   def index
     @diet_types = DietType.all
     @diet_type = DietType.new
@@ -37,7 +37,7 @@ class DietTypesController < ApplicationController
     @user.diet_type = DietType.find_by_name(diet_type_params[:name])
     
     respond_to do |format|
-      flash[:success] = 'diet type was successfully add.' 
+      flash[:success] = 'diet type was successfully add.'
       format.html { redirect_to action:"index" }
     end
   end

@@ -2,6 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$apple:       #4f930c;
 $darkGreen:   #17411a;
 $green:       #328d39;
 $fluoGreen:   #4eda57;
@@ -10,7 +11,9 @@ $veryLightGreen:  #ccf8ce;
 
 .widget
 {
+  z-index: -1;
   padding: 0;
+  height: 200px;
   .widget_content
   {
     background-color: white;
@@ -21,6 +24,7 @@ $veryLightGreen:  #ccf8ce;
     padding: 0;
     margin: 0;
     width: 100%;
+    height: 100%;
   }
   .title
   {
@@ -31,5 +35,79 @@ $veryLightGreen:  #ccf8ce;
     text-align: center;
     font-size: 23px;
     padding: 5px 0;
-  }
+  }  
+}
+
+.temp
+ {
+    background-color: $fluoGreen;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    color: white;
+    text-align: center;
+    font-size: 23px;
+    padding: 5px 0;
+ }
+
+.profil
+{
+    background-color: white;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    opacity: 0.8;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    text-color: $darkGreen;
+    font-size: 23px;
+}
+
+.circle_image
+{
+  overflow: hidden;
+  border-radius:100px;
+  border: 6px solid $fluoGreen;
+}
+
+.recipe_left
+{
+  width: 50%;
+  height: 100%;
+  float:left;
+}
+
+.recipe_right
+{
+  width: 50%;
+  height: 100%;
+  float: right;  
+  margin-top: -50px;
+}
+
+.recipe_right > h1{
+  font-size: 18px;
+ }
+
+.recipe_right > h2{
+  font-size: 14px;
+ }
+
+.losange{
+  display: block;
+  width: 50px;
+  height: 50px;
+  margin: 25px auto;
+  background-color: $fluoGreen;
+  position : relative;
+  top: 75px;
+  transform:rotate(45deg); 
+  -ms-transform:rotate(45deg);
+  -moz-transform:rotate(45deg);
+  -webkit-transform:rotate(45deg);
+  -o-transform:rotate(45deg);
 }

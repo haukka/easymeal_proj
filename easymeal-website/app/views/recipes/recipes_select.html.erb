@@ -1,5 +1,5 @@
 <div class="row">
-  <h1>Recette</h1>
+  <h1>Recettes</h1>
   <div style="height: 140px; border-radius: 7px; background: #4eda57;">
     <h2 style="color: white; padding-top: 10px">Recherche</h2>
     <div class="ui-widget field event" style="margin-top: 20px; text-align: left; padding-left:20px">
@@ -10,15 +10,19 @@
       <% end %>
     </div>
   </div>
-  <div class="inside bordered" style="height: 280px; margin-top: 20px;">
+  <div class="inside bordered" style="height: 265px; margin-top: 20px;">
     <h2>Recettes suggérées</h2>
-      <%= link_to image_tag("recipe/" + @rand_id.to_s + ".png", :style => "height:180px; width: 270px; border-radius: 6px;"), :action => 'show', :id => @rand_id %>
-      <%= link_to image_tag("recipe/" + @rand_id2.to_s + ".png", :style => "height:180px; width: 270px; margin-left: 20px; margin-right: 20px; border-radius: 6px;"), :action => 'show', :id => @rand_id %>
-      <%= link_to image_tag("recipe/" + @rand_id3.to_s + ".png", :style => "height:180px; width: 270px; border-radius: 6px;"), :action => 'show', :id => @rand_id %>
+      <% @recipes.each do |recipe| %>
+        <div class="col-md-3 col-sm-3 recipe_select">
+          <%= link_to recipe do %>
+            <%= image_tag recipe.photo.url(:thumb_large), width: "100%" %>
+          <% end %>
+        </div>
+      <% end %>
       <div style="text-align: right; margin-right: 100px;">
 	<br />
-	<%= link_to '>> toutes les recettes', :action => 'index' %>
-	<!-- <button data-toggle="modal" data-target="#myModal" class="underline" style="border: none; background: none; outline:none;">
+	<%= link_to '>> proposer une recette', new_recipe_path, style: "margin-right: 10px;" %> <%= link_to '>> toutes les recettes', :action => 'index' %>
+    <!-- <button data-toggle="modal" data-target="#myModal" class="underline" style="border: none; background: none; outline:none;">
   >> Ajouter une recette
       </button> -->
       </div>

@@ -117,3 +117,13 @@ function show_table() {
 	$("#preptable").hide();
     }
 }
+
+function add_aliment()
+{
+  qty = $("#quantity").val();
+  aliment = $("#aliment").val();
+  aliment_id = $("#aliment_id").val();
+  $("#aliments_list").append("<li>"+ qty +" "+ aliment +"<input type='hidden' recipes[qtys] class='qtys' value='"+qty+"'/><input type='hidden' recipe[aliments] class='aliments' value='"+aliment_id+"'/></li>");
+  $("#quantity").val("");
+  $("#aliment").val("");
+}

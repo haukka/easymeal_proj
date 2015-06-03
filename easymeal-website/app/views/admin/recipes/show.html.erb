@@ -1,0 +1,51 @@
+<% content_for :page_title do %>
+  Recette
+<% end %>
+<% content_for :page_subtitle do %>
+  en détail
+<% end %>
+
+<div class="row">
+    <div class="col-md-9"><h2><%= @recipe.name %></h2></div>
+    <div class="col-md-3" style="line-height: 1.1;margin-top: 20px;">
+        <%= link_to admin_recipe_validate_path(@recipe), method: :post do %>
+            <i class="fa fa-check-circle fa-4x recipe_validation" style="margin: 0 5px 0 5px;color: #00a65a;"></i>
+        <% end %>
+        <%= link_to admin_recipe_refuse_path(@recipe), method: :post do %>
+            <i class="fa fa-times-circle fa-4x recipe_validation" style="margin: 0 5px 0 5px;color: #f56954;"></i>
+        <% end %>
+    </div>
+</div>
+
+    <p>Temps estimés : <%= @recipe.time %> min</p>
+    <p>Calories par personnes : <%= @recipe.calories %></p>
+    <p>Recette pour : <%= @recipe.nb_servings %> personne(s)</p>
+    <p>Difficulté : <%= @recipe.difficulty %></p>
+	<p>Type de repas :
+        <% @recipe.recipe_categories.each do |category| %>
+            <%= category.name %>
+            <% if category != @recipe.recipe_categories.last %>, <% end %>
+        <% end %>
+    </p>
+    
+    <div style="overflow:auto;padding: 10px 0 10px 0;">
+            <p>Ingr&eacute;dients :</p>
+            
+            <% @recipe.aliments_quantity.each do |alim| %>
+                <div class="row">
+                	  <div class="col-md-1" style="text-align: right;">
+                	      <%= alim.quantity %><% if alim.aliment.isQuantifiable %> g<% end %>
+                	  </div>
+            
+                    <div class="col-md-11" style="text-align: left;">
+                        <%= alim.aliment.name %>
+                    </div>
+                </div>
+            <% end %>
+    </div>
+    <br/>
+    <p>Préparation : </p>
+    <div style="text-align: left;">
+      <%= @recipe.text.html_safe %>
+    </div>
+

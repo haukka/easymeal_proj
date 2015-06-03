@@ -1,18 +1,23 @@
+# -*- encoding : utf-8 -*-
 # == Schema Information
 #
 # Table name: aliments_quantities
 #
-#  id         :integer          not null, primary key
-#  aliment_id :integer
-#  recipe_id  :integer
-#  quantity   :integer
+#  id               :integer          not null, primary key
+#  aliment_id       :integer
+#  recipe_id        :integer
+#  quantity         :integer
+#  shopping_list_id :integer
+#  stock_id         :integer
 #
 
 class AlimentsQuantity < ActiveRecord::Base
   belongs_to :recipe
   belongs_to :aliment
+  belongs_to :shopping_lists
+  belongs_to :stock
 
-  validate :quantity
+  validates :quantity, presence: true
   # validate :has_recipes?
   validate :has_aliments?
 

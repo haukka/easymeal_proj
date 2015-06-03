@@ -1,6 +1,6 @@
 <div class="row">
   <h1>Courbe de poids</h1>
-  <%= line_chart @weight_points.group(:date).maximum(:weight) %>
+  <div id="weight_curve"></div>
   <br>
   <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
     Ajouter un poids
@@ -13,6 +13,21 @@
  change_weight();
  change_date();
  submit_weight();
+ Morris.Line({
+   element: 'weight_curve',
+   data: [
+     <% @weight_points.order(created_at: :asc).each do |point| %>
+       <% if @weight_points.order(created_at: :asc).last == point %>
+           { y: '<%= point.date.strftime("%Y-%m-%d") %>', a: <%= point.weight %> }
+       <% else %>
+           { y: '<%= point.date.strftime("%Y-%m-%d") %>', a: <%= point.weight %> },
+       <% end %>
+     <% end %>
+   ],
+   xkey: 'y',
+   ykeys: ['a'],
+   labels: ['Poids']
+ });
  });
 </script>
 
@@ -37,13 +52,13 @@
 	<% end %>
 	<div class="field">
 	  <%= f.label :weight, 'Entrer votre poids' %><br>
-	  <%= f.number_field :weight, class: "white2" %>
+	  <%= f.number_field :weight, class: "weight_val white2" %>
 	  <div id="weight_error" class="hidden">Veuillez ajouter votre poids.</div>
 	</div>
 	<div class="field">
 	  <%= f.label :date, 'Date' %><br>
-	  <%= f.text_field :date, class: "datepicker white2" %>
-	  <div id="date_error" class="hidden">Veuillez ajouter une date.</div>
+	  <%= f.text_field :date, class: "datepicker white2", style: "position: relative;z-index: 1050;" %>
+	  <div id="date_error" class="hidden">Veuillez ajouter une date valide.</div>
 	</div>
       </div>
       <div class="modal-footer">

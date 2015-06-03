@@ -1,0 +1,205 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+$darkGreen:   #17411a;
+$green:       #328d39;
+$fluoGreen:   #4eda57;
+$lightGreen:  #8cf292;
+$veryLightGreen:  #ccf8ce;
+
+.center
+{
+  text-align: center !important;
+}
+
+#sub-nav
+{
+  min-height: 35px;
+  border-radius: 7px;
+  background: #4eda57;
+  text-align: left;
+  padding: 5px;
+  color: white;
+  div#title
+  {
+    text-align: center;
+    font-size: 20px;
+  }
+  a
+  {
+    color: white;
+    font-size: 18px;
+    text-decoration: underline;
+  }
+  div#generation
+  {
+    text-align: right;
+  }
+  .buttonto
+  {
+   border:none;
+   background: none;
+   outline: none;
+   font-size: 18px;
+    text-decoration: underline;
+  }
+}
+
+div#calendar
+{
+  div.planning_day
+  {
+    float: left;
+    width: 14.2%;
+    div.day
+    {
+      margin-top: 10px;
+      color: $fluoGreen;
+      font-size: 20px;
+    }
+    .today
+    {
+      color: $green !important;
+    }
+    a
+    {
+      
+    }
+    div.meals.first
+    {
+      padding-left: 0;
+    }
+    div.meals.last
+    {
+      padding-right: 0;
+    }
+    div.meals.today
+    {
+        div
+        {
+          background-color: $lightGreen;
+        }
+    }
+    div.meals
+    {
+      padding: 0 4px;
+	  
+	  a.add_recipe
+	  {
+		  position: absolute;
+		  bottom: 0px;
+		  right: 3px;
+		  color: $darkGreen;
+	  }
+	  
+      .cadre_recipes
+      {
+        margin-top: 10px;
+        background-color: $veryLightGreen;
+        border-radius: 7px;
+        text-align: left;
+        padding: 1px;
+        font-size: 12px;
+		position: relative;
+      }
+        div.breakfast
+        {
+          min-height: 65px;
+		  div.recipes
+		  {
+			  
+			  span{
+				  display:inline-block;
+				  cursor:pointer;
+			  }
+		  }
+        }
+        div.lunch
+        {
+          min-height: 140px;
+		  
+		  div.recipes
+		  {
+			  
+			  span{
+				  display:inline-block;
+				  cursor:pointer;
+			  }
+		  }
+		  
+        }
+        div.dinner
+        {
+          min-height: 140px;
+		  div.recipes
+		  {
+			  
+			  span{
+				  display:inline-block;
+				  cursor:pointer;
+			  }
+		  }
+        }
+      a:hover
+      {
+        div
+        {
+        background-color: $fluoGreen;
+        color: white;
+      }
+      }
+    }
+  }
+}
+
+.modal-body
+{
+//  padding: 0;
+  #search
+  {
+    padding: 15px;
+    border-bottom: 1px solid #e5e5e5;
+  }
+  #result
+  {
+    div#count, div#carousel, div.owl-item
+    {
+      padding: 10px;
+    }
+  }
+}
+
+.search_bar
+{
+  height: 40px;
+  width: 80%;
+}
+
+.owl-item img {
+width: 96%;
+margin: 0 auto;
+}
+
+.row-stock
+{
+  margin-top: 25px;
+}
+
+.stock
+{
+  border-top: solid 14px;
+  border-bottom: solid 14px;
+  border-color: #835930;
+  padding: 0;
+}
+
+.inside-stock
+{
+  border-left: solid 10px;
+  border-right: solid 10px;
+  border-color: #835930;
+  padding: 25px 10px 25px 10px;
+  margin: 0 10px 0 10px;
+}

@@ -14,6 +14,15 @@
     <div class="col-md-3 center">
       <div class="inside bordered" style="height: 207px;">
         <h2>Photo</h2>
+        <div>
+          <%= image_tag @user.photo.url(:thumb), :id => "cropbox", class: "circle_image", width: "43%" %>
+        </div>
+        <%= form_for @user do |f| %>
+          <div>
+              <%= f.file_field :photo, width: "100%" %>
+          </div>
+            <%= f.submit t("action.send"), class: "btn btn-success" %>
+        <% end %>
       </div>
     </div>
     <div class="col-md-8 center" style="padding-left: 0px;">
@@ -48,24 +57,13 @@
               <%= f.label :username %><br>
               <%= f.text_field :username, onkeyup: "$(this).parent().submit();", class:"white" %>
             </div>
-          </div>
-          <div class="row" style="margin: 15px 0;">
-            <div class="field col-md-12" id="home_details">
-              <% if @user.home %>
-                Vous faite partie du foyer <%= @home.name %>.
-                Vous souhaitez en changer ?
-                <button class="btn btn-success" data-toggle="modal" data-target="#home_modal" style="margin-left: 10px;">
-                  Choisir un nouveau foyer
-                </button>
-              <% else %>
-                Vous n'avez pas de foyer rattaché.
-                <button class="btn btn-success" data-toggle="modal" data-target="#home_modal" style="margin-left: 10px;">
-                  Cr&eacute;er un foyer
-                </button>
-                
-                
-                
-              <% end %>
+            <div class="field col-md-6">
+              <%= f.label :height %><br>
+              <%= f.number_field :height, onblur: "$(this).parent().submit();", class:"white" %>
+            </div>
+            <div class="field col-md-6">
+              <%= f.label :birth %><br>
+              <%= f.text_field :birth, onkeyup: "$(this).parent().submit();", class:"white" %>
             </div>
           </div>
         <% end %>
@@ -85,7 +83,30 @@
             </ul>
           </div>
       <% end %>
-      <div class="col-md-8" style="margin-top: 20px">
+      
+      <div class="col-md-3" style="margin-top: 20px;">
+          <div class="inside bordered" style="height: 200px;">
+              <h2>Foyer</h2>
+              <div class="row" style="margin: 15px 0;">
+                <div class="field col-md-12" id="home_details">
+                  <% if @user.home %>
+                    Vous faite partie du foyer <%= @user.home.name %>.
+                    Vous souhaitez en changer ?
+                    <button class="btn btn-success" data-toggle="modal" data-target="#home_modal" style="margin: 20px 0 0 10px;">
+                      Changer de foyer
+                    </button>
+                  <% else %>
+                    Vous n'avez pas de foyer rattaché.
+                    <button class="btn btn-success" data-toggle="modal" data-target="#home_modal" style="margin: 20px 0 0 10px;">
+                      Cr&eacute;er un foyer
+                    </button>
+                  <% end %>
+                </div>
+              </div>
+          </div>
+      </div>
+      
+      <div class="col-md-5" style="margin-top: 20px;padding-left: 0;">
           <div class="inside bordered filled" style="height: 200px;">
             <h2>Sécurité</h2>
               <div class="row">
@@ -103,8 +124,8 @@
                   <%= f.password_field :password, class:"white", id: "user_password" %>
                 </div>
           
-                <div class="field">
-                  <%= f.label "Confirmation du mot de passe" %><br>
+                <div class="field col-md-6">
+                  <%= f.label "Confirmation" %><br>
                   <%= f.password_field :password_confirmation, class:"white", id: "user_password_confirmation" %>
                 </div>
               </div>
@@ -141,20 +162,19 @@
     window.currentUser = {
             token : "<%= current_user.auth_token %>"
         }
-  });
 </script>
 
 <div class="modal fade" id="home_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <%= form_for @home, remote: true do |f| %>
+      <%= form_for @user.home, remote: true do |f| %>
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h4 class="modal-title" id="myModalLabel">Choix d'un foyer</h4>
         </div>
         <div class="modal-body" style="text-align: center;">
 
-          <% if @home.errors.any? %>
+          <% if @user.home.errors.any? %>
             <div id="error_explanation">
               <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
@@ -197,3 +217,7 @@
   </div>
 </div>
 <div>
+
+<script type="text/javascript">
+  window.I18n = <%= current_translations.to_json.html_safe %>
+</script>

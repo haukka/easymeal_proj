@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>EasymealWebsite</title>
+    <%= stylesheet_link_tag    "admin", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "admin", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body class="skin-blue">
+  <%= render 'layouts/admin_navbar' %>
+     <% if flash[:notice] %>
+         <div class="alert alert-success" style="width: 85%;margin: auto auto;margin-top: 2%;">
+           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+           <%= flash[:notice] %>
+         </div>
+     <% end %>
+     <div class="wrapper row-offcanvas row-offcanvas-left" style="min-height: 284px;">
+        <%= render 'layouts/admin_sidebar' %>
+        <aside class="right-side">
+          <section class="content-header">
+              <h1>
+                  <%= yield :page_title %>
+                  <small><%= yield :page_subtitle %></small>
+              </h1>
+              <!-- <ol class="breadcrumb">
+                  <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                  <li class="active">Dashboard</li>
+              </ol> -->
+          </section>
+          <section class="content">
+            <%= yield %>
+          </section>
+        </aside>
+     </div>
+  </body>
+</html>
+<script>
+    $(document).ready(function()
+    {
+      adminJs();
+      displayRecipesCount("<%= current_user.auth_token %>");
+      window.setInterval(function()
+      {
+          displayRecipesCount("<%= current_user.auth_token %>");
+      }, 5000);
+    });
+</script>

@@ -1,29 +1,59 @@
 <nav class="navbar navbar-default" role="navigation">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-      </button>
-      <a class="navbar-brand" href="/"><%= image_tag('logo.png') %>   EasyMeal</a>
-    </div>
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            </button>
+            <a class="navbar-brand" href="/"><%= image_tag('logo.png') %>   EasyMeal</a>
+        </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-      <ul class="nav navbar-nav navbar-right">
-        <% if user_signed_in? %>
-          <li><a href="#">Mon stock</a></li>
-          <li><a href="#">Planning</a></li>
-          <li><%= link_to "Recettes", recipes_select_path %></li>
-          <li><%= link_to "Mon profil", edit_user_path(current_user.id) %></li>
-          <li><%= link_to "A propos", a_propos_path %></li>
-          <li><%= link_to "Déconnexion", destroy_user_session_path, :method => :delete %></li>
-        <% else %>
-          <li><%= link_to "Connexion", new_user_session_path %></li>
-          <li><%= link_to "Inscription", new_user_registration_path %></li>
-          <li><%= link_to "A propos", a_propos_path %></li>
-        <% end %>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+            <ul class="nav navbar-nav navbar-right">
+                <% if user_signed_in? %>
+                    <% if current_user.isAdmin %>
+                        <li data-toggle="tooltip" data-placement="top" title="Dashboard Admin">
+                            <%= link_to admin_dashboard_index_path do %><span class="fa fa-tachometer"></span><% end %>
+                        </li>
+                    <% end %>
+                    <li data-toggle="tooltip" data-placement="top" title="Planning">
+                        <%= link_to menu_schedules_path do %><span class="glyphicon glyphicon-calendar"></span><% end %>
+                    </li>
+                    <li data-toggle="tooltip" data-placement="top" title="Recettes">
+                        <%= link_to recipes_select_path do %><span class="glyphicon glyphicon-cutlery"></span><% end %>
+                    </li>
+                    <li data-toggle="tooltip" data-placement="top" title="Mon Profil">
+                        <%= link_to edit_user_path(current_user.id) do %><span class="glyphicon glyphicon-user"></span><% end %>
+                    </li>
+                    <li data-toggle="tooltip" data-placement="top" title="Mon poids">
+                        <%= link_to weight_points_path do %><span class="glyphicon glyphicon-icomoon"></span><% end %>
+                    </li>
+        
+                    <% if !current_user.home.nil? %>
+                        <li data-toggle="tooltip" data-placement="top" title="Listes de courses">
+                            <%= link_to shopping_lists_path do %><span class="glyphicon glyphicon-shopping-cart"></span><% end %>
+                        </li>
+                        <li data-toggle="tooltip" data-placement="top" title="Mon Stock">
+                            <%= link_to stocks_path do %><span class="glyphicon glyphicon-home"></span><% end %>
+                        </li>
+                    <% end %>
+                    <li data-toggle="tooltip" data-placement="top" title="Déconnexion">
+                        <%= link_to destroy_user_session_path, :method => :delete do %><span class="glyphicon glyphicon-log-out"></span><% end %>
+                    </li>
+                <% else %>
+                    <li><%= link_to "Connexion", new_user_session_path %></li>
+                    <li><%= link_to "Inscription", new_user_registration_path %></li>
+                    <li><%= link_to "A propos", a_propos_path %></li>
+                <% end %>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
 </nav>
+
+<script>
+$(function ()
+{
+    $('[data-toggle="tooltip"]').tooltip()
+})
+</script>

@@ -11,15 +11,33 @@
 <%= render 'layouts/navbar' %>
 
  <% if request.fullpath == "/" %>
+     <% if flash[:notice] %>
+         <div class="alert alert-success" style="width: 85%;margin: auto auto;margin-top: 2%;">
+           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+           <%= flash[:notice] %>
+         </div>
+     <% end %>
+   <%= yield %>
+ <% elsif request.fullpath == "/recipes_select" || request.fullpath.match('/menu_schedules') %>
+     <% if flash[:notice] %>
+         <div class="alert alert-success" style="width: 85%;margin: auto auto;margin-top: 2%;">
+           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+           <%= flash[:notice] %>
+         </div>
+     <% end %>
+   <div class="content_recipe">
      <%= yield %>
- <% elsif request.fullpath == "/recipes_select" %>
-     <div class="content_recipe">
-        <%= yield %>
-    </div>
- <% else %>
-    <div class="content">
-        <%= yield %>
-    </div>
+   </div>
+   <% else %>
+       <% if flash[:notice] %>
+           <div class="alert alert-success" style="width: 85%;margin: auto auto;margin-top: 2%;">
+             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+             <%= flash[:notice] %>
+           </div>
+       <% end %>
+   <div class="content">
+     <%= yield %>
+   </div>
 <% end %>
 
 </body>

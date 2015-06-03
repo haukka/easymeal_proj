@@ -1,7 +1,7 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 
-function empty_div(){
+function empty_div_fav(){
     if ($("#allergen_id").children().length == 0){
 	$("#allergen_id").append( "<p>Vous ne possédez pas d'aliment allergiques.</p>" );
     }
@@ -13,7 +13,7 @@ function empty_div(){
     }
 }
 
-function valid_submit(){
+function valid_submit_fav(){
     $(".search_bar").change(function(){
 	$("#search_error").addClass("hidden");
 	$("#search_error").hide();

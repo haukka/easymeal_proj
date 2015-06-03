@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # == Schema Information
 #
 # Table name: aliments
@@ -32,7 +33,7 @@
 class Aliment < ActiveRecord::Base
   has_and_belongs_to_many :home
   has_and_belongs_to_many :categories
-  has_and_belongs_to_many :shopping_lists
+#  has_and_belongs_to_many :shopping_lists
   has_many :aliments_quantity
   
   has_many :proscribes

@@ -18,7 +18,8 @@ div#name_error, div#price_error, div#calorie_error, div#difficulty_error, div#ti
     overflow-y: auto;
 }
 
-input[type="text1"], input[type="text"].white2, input[type="number"].white2, textarea.white2 {
+input[type="text1"], input[type="text"].white2, input[type="number"].white2, textarea.white2
+{
   line-height: 20px;
   font-size: 14px;
   color: #555555;
@@ -27,7 +28,8 @@ input[type="text1"], input[type="text"].white2, input[type="number"].white2, tex
           border-radius: 4px;
 }
 
-input[type="text1"], input[type="text"].white2, input[type="number"].white2, textarea.white2{
+input[type="text1"], input[type="text"].white2, input[type="number"].white2, textarea.white2
+{
     background-color: #ffffff;
     border: 1px solid #cccccc;
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
@@ -39,7 +41,8 @@ input[type="text1"], input[type="text"].white2, input[type="number"].white2, tex
     transition: border linear 0.2s, box-shadow linear 0.2s;
 }
 
-input[type="text1"]:focus, input[type="text"].white2:focus, input[type="number"].white2:focus, textarea.white2:focus {
+input[type="text1"]:focus, input[type="text"].white2:focus, input[type="number"].white2:focus, textarea.white2:focus
+{
   border-color: rgba(82, 168, 236, 0.8);
   outline: 0;
   outline: thin dotted \9;
@@ -50,6 +53,22 @@ input[type="text1"]:focus, input[type="text"].white2:focus, input[type="number"]
           box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
 }
 
-.underline:focus, .underline:hover {
+.underline:focus, .underline:hover
+{
     text-decoration: underline;
+}
+
+.recipe_select
+{
+  padding: 0px 5px;
+}
+
+form.recipe_editor div.form-group input, textarea
+{
+  width: 100%;
+}
+
+.ui-autocomplete
+{
+  width: 200px;
 }

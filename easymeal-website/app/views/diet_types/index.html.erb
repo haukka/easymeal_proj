@@ -11,14 +11,14 @@
   </div>
   <div class="row">
     <div class="col-md-11">
-      <h2>Régime suivi : <small> <%= current_user.diet_type.name %></small></h2>
+      <h2>Régime suivi : <small> <%= current_user.diet_type.name.html_safe %></small></h2>
     </div>
   </div>
   <br>
   <div class="row">
     <div class="col-md-11">
-      <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-	Modifier le régime à suivre
+      <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">
+	Modifier
       </button>
     </div>
   </div>
@@ -27,11 +27,11 @@
   <div class="row">
     <div class="col-md-11">
       <div class="panel panel-success">
-	<div class="panel-heading">Maladie</div>
+	<div class="panel-heading">Maladie(s)</div>
 	<div class="panel-body" id="disease_id">
 	  <% @user_disease.each do |disease| %>
 	  <ul class="list-inline" style="text-align: left; margin-left: 4px;">
-	    <%= link_to disease.name, :controller => :diseases, :action => :show, :id => disease.id %>
+	    <%= link_to disease.name.html_safe, :controller => :diseases, :action => :show, :id => disease.id %>
 	    <%= link_to '', disease, method: :delete, data: { confirm: 'Are you sure?'}, :class => "glyphicon glyphicon-remove", style: "color: red;" %>
 	  </ul>
 	  <% end %>
@@ -40,8 +40,8 @@
     </div>
     <div class="row">
       <div class="col-md-11">
-	<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#disease_modal">
-	  Ajouter une maladie
+	<button class="btn btn-success btn-lg" data-toggle="modal" data-target="#disease_modal">
+	  Ajouter
 	</button>
       </div>
     </div>

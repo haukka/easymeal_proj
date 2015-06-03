@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # == Schema Information
 #
 # Table name: users
@@ -38,6 +39,11 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
+#  photo_file_name        :string(255)
+#  photo_content_type     :string(255)
+#  photo_file_size        :integer
+#  photo_updated_at       :datetime
+#  isAdmin                :boolean          default(FALSE)
 #
 
 class User < ActiveRecord::Base
@@ -48,6 +54,7 @@ class User < ActiveRecord::Base
   belongs_to :home
   has_one :diet_type
   has_many :weight_points
+  has_many :allergen_and_favorite_aliments
   has_and_belongs_to_many :diseases
   has_and_belongs_to_many :menu_schedules
 
@@ -57,6 +64,11 @@ class User < ActiveRecord::Base
   validates :firstname, presence: true
   validates :lastname, presence: true
   validates :gender, presence: true
+  validates :birth, presence: true
+  validates :height, presence: true
+  
+  has_attached_file :photo, :styles => { :medium => "400x400#", :thumb => "100x100#" }, :default_url => "/images/:style/missing.png"
+  validates_attachment_content_type :photo, :content_type => /\Aimage\/.*\Z/
 
   after_initialize :init
 

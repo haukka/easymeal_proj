@@ -77,6 +77,10 @@
       <%= f.label :birth %><br>
       <%= f.text_field :birth, id: "datepicker" %>
     </div>
+    <div class="field">
+    	 <%= f.label :height %><br>
+    	 <%= f.number_field :height, min: 0 %>
+    </div>
     
     <div class="actions">
       <%= link_to 'Précédent', "#", class: "btn btn-large btn-cancel",

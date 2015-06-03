@@ -29,12 +29,15 @@ function change_date() {
 function submit_weight(){
     $("#new_weight_point").submit(function(e) {
 	var value = true;
-	if ($("#weight_point_weight").val().length == 0) {
+	var today = new Date();
+	var cmp = new Date($(".datepicker").val());
+	var res = today.getTime() - cmp.getTime();
+	if ($("#weight_point_weight").val().length == 0 || $(".weight_val").val() < 0) {
 	    value = false;
 	    $("#weight_error").removeClass("hidden");
 	    $("#weight_error").show();
 	}
-	if ($(".datepicker").val().length == 0) {
+	if ($(".datepicker").val().length == 0 || res < 0) {
 	    value = false;
 	    $("#date_error").removeClass("hidden");
 	    $("#date_error").show();

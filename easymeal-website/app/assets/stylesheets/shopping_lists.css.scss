@@ -1,0 +1,43 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+#list_id
+{
+  margin: 30px 0;
+}
+
+.row-post-it
+{
+  margin-top: 25px;
+}
+
+.post-it
+{
+  background:#fefabc; 
+  padding: 40px 15px;
+  font-family: 'Gloria Hallelujah', cursive; 
+  font-size:15px; 
+  color: #000; 
+
+
+  -moz-transform: rotate(7deg);
+  -webkit-transform: rotate(7deg);
+  -o-transform: rotate(7deg);
+  -ms-transform: rotate(7deg);
+  transform: rotate(7deg);
+
+  box-shadow: 0px 4px 6px #333;
+  -moz-box-shadow: 0px 4px 6px #333;
+  -webkit-box-shadow: 0px 4px 6px #333;
+  .close:hover a
+  {
+    text-decoration: none;
+  }
+  .close
+  {
+    position: relative;
+    top: -30px;
+  }
+}

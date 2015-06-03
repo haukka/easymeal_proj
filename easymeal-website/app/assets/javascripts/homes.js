@@ -13,7 +13,6 @@ function create_home()
   if (!home["home"]["city"])
     home["home"]["city"] = ""
   
-  console.log(home);
   if (home["home"]["name"] == "" || home["home"]["street"] == "" || home["home"]["zipcode"] == "" || home["home"]["city"] == "")
   {
     var body_content = "<div class='alert alert-danger fade in flash'><button class='close' data-dismiss='alert'>×</button>" +
@@ -56,14 +55,14 @@ function create_home()
       timeout: 30000,
       success: function(responseData, textStatus, jqXHR) {
         ret = responseData;
-        if (ret["success"])
+        if (ret["status"] == "OK")
         {
           $('#home_modal').modal('hide');
           var msg = "<div class='alert alert-success fade in flash'><button class='close' data-dismiss='alert'>×</button>" +
-          ret["success"] + "</div>";
+          ret["message"] + "</div>";
           $(".content").before(msg);
           $("#home_details").empty();
-          $("#home_details").append("Vous faite partie du foyer " + ret["home"]["name"] +
+          $("#home_details").append("Vous faite partie du foyer " + ret["data"]["home"]["name"] +
                   ". Vous souhaitez en changer ?" +
                   "<button class='btn btn-success' data-toggle='modal' data-target='#home_modal' style='margin-left: 10px;'>" +
                     "Choisir un nouveau foyer" +
@@ -72,8 +71,8 @@ function create_home()
         else
         {
           $('#home_modal').modal('hide');
-          var msg = "<div class='alert alert-error fade in'><button class='close' data-dismiss='alert'>×</button>" +
-          ret["error"] + "</div>";
+          var msg = "<div class='alert alert-error fade in flash'><button class='close' data-dismiss='alert'>×</button>" +
+          ret["message"] + "</div>";
           $(".content").before(msg);
         }
       },
@@ -186,19 +185,19 @@ function searchHomes()
     
     home = { "home": { "name": home_name, "street": home_street, "zipcode": home_zipcode, "city": home_city } };
       var body_content = "<div class='field'>" +
-                      "<label for='home_name'>Name</label><br>" +
+                      "<label for='home_name'>"+ I18n.activerecord.attributes.home.name +"</label><br>" +
                       "<input id='home_name' name='home[name]' type='text' value='" + home["home"]["name"] + "'>" +
                     "</div>" +
                     "<div class='field'>" +
-                      "<label for='home_street'>Street</label><br>" +
+                      "<label for='home_street'>"+ I18n.activerecord.attributes.home.street +"</label><br>" +
                       "<input id='home_street' name='home[street]' type='text' value='" + home["home"]["street"] + "'>" +
                     "</div>" +
                     "<div class='field'>" +
-                      "<label for='home_zipcode'>Zipcode</label><br>" +
+                      "<label for='home_zipcode'>"+ I18n.activerecord.attributes.home.zipcode +"</label><br>" +
                       "<input id='home_zipcode' name='home[zipcode]' type='text' value='" + home["home"]["zipcode"] + "'>" +
                     "</div>" +
                     "<div class='field'>" +
-                      "<label for='home_city'>City</label><br>" +
+                      "<label for='home_city'>"+ I18n.activerecord.attributes.home.city +"</label><br>" +
                       "<input id='home_city' name='home[city]' type='text' value='" + home["home"]["city"] + "'>" +
                     "</div>"
       $(".modal-body").append(body_content);

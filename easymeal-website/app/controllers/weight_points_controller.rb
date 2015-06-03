@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class WeightPointsController < ApplicationController
   before_action :set_weight_point, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate
@@ -23,7 +24,7 @@ class WeightPointsController < ApplicationController
   # POST /weight_points
   # POST /weight_points.json
   def create
-    @weight_point = WeightPoint.new(weight_point_params)
+    @weight_point = WeightPoint.new(weight: params[:weight_point][:weight], date: Date.strptime(params[:weight_point][:date], "%m/%d/%Y"))
     @weight_point.user_id = current_user.id
 
     respond_to do |format|

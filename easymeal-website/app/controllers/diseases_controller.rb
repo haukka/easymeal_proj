@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class DiseasesController < ApplicationController
   before_action :set_disease, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate

@@ -1,0 +1,82 @@
+<% content_for :page_title do %>
+  Tableau de bord
+<% end %>
+
+<div class="row">
+    <section class="col-lg-7 connectedSortable ui-sortable">
+        
+        <div class="nav-tabs-custom" style="cursor: move;">
+            
+            <ul class="nav nav-tabs pull-right ui-sortable-handle">
+                <li><a href="#desserts" data-toggle="tab">Desserts</a></li>
+                <li><a href="#dishes" data-toggle="tab">Plats</a></li>
+                <li><a href="#collations" data-toggle="tab">Go&ucirc;ters</a></li>
+                <li class="active"><a href="#entries" data-toggle="tab">Entr&eacute;es</a></li>
+                <li class="pull-left header"><span class="glyphicon glyphicon-cutlery"></span> Nouvelles Recettes</li>
+            </ul>
+            
+            <div class="tab-content no-padding box">
+                <div class="tab-pane" id="desserts" style="position: relative; height: 300px;">
+                    <ul class="todo-list">
+                        <% @desserts.each do |dessert| %>
+                            <li>
+                                <span class="text"><%= dessert.name %></span>
+                                <div class="tools">
+                                    <%= link_to admin_recipe_path(dessert) do %><i class="fa fa-edit"></i><% end %>
+                                </div>
+                            </li>
+                        <% end %>
+                    </ul>
+                </div>
+                <div class="tab-pane" id="collations" style="position: relative; height: 300px;">
+                    <ul class="todo-list">
+                        <% @collations.each do |collation| %>
+                            <li>
+                                <span class="text"><%= collation.name %></span>
+                                <div class="tools">
+                                    <%= link_to admin_recipe_path(collation) do %><i class="fa fa-edit"></i><% end %>
+                                </div>
+                            </li>
+                        <% end %>
+                    </ul>
+                </div>
+                <div class="tab-pane" id="dishes" style="position: relative; height: 300px;">
+                    <ul class="todo-list">
+                        <% @dishes.each do |dish| %>
+                            <li>
+                                <span class="text"><%= dish.name %></span>
+                                <div class="tools">
+                                    <%= link_to admin_recipe_path(dish) do %><i class="fa fa-edit"></i><% end %>
+                                </div>
+                            </li>
+                        <% end %>
+                    </ul>
+                </div>
+                <div class="tab-pane active" id="entries" style="position: relative; height: 300px;">
+                    <ul class="todo-list">
+                        <% @entries.each do |entry| %>
+                            <li>
+                                <span class="text"><%= entry.name %></span>
+                                <div class="tools">
+                                    <%= link_to admin_recipe_path(entry) do %><i class="fa fa-edit"></i><% end %>
+                                </div>
+                            </li>
+                        <% end %>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+        
+    </section>
+</div>
+
+<script>
+    $(document).ready(function()
+    {
+      window.setInterval(function()
+      {
+          displayRecipesDashboard("<%= current_user.auth_token %>");
+      }, 5000);
+    });
+</script>

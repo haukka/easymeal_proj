@@ -1,33 +1,33 @@
 <h1>Liste des recettes</h1>
 
 <div class="row" style="height:400px; overflow: auto;" id="recipe_id">
-  <% @recipes.each do |recipe| %>
-  <div class="col-md-6 col-md-offset-3">
-    <div class="panel panel-success">
-      <div class="panel-heading"><%= recipe.name %></div>
-      <div class="panel-body">
-	<div style="float:left;">
-	<%=image_tag "recipe/" + recipe.id.to_s + ".png", :class => "bordered", :style => "border-radius: 6px; height:150px; margin-left: 50px;" %>
-	</div>
-	<p>Temps estimés : <%= recipe.time %> min</p>
-	<p>Difficulté : <%= recipe.difficulty %></p>
-	<% if recipe.calories == nil %>
-	<p>Nombre de calories : Non connu</p>
-	<% else %>
-	<p>Nombre de calories : recipe.calories</p>
-	<% end %>
-	<%= link_to 'Voir la recette', { :action =>'show', :id => recipe.id }, :class => "btn btn-large btn-success" %>
-      </div>
-    </div>
-  </div>
-  <% end %>
+    <% @recipes.each do |recipe| %>
+        <div class="col-md-4">
+            <div class="panel panel-success">
+                <div class="panel-heading"><%= recipe.name %></div>
+                <div class="panel-body">
+                    <div style="float:left;">
+                        <%=image_tag recipe.photo.url(:thumb), :class => "bordered", :style => "border-radius: 6px; height:100px;" %>
+                    </div>
+                    <p>Temps estimés : <%= recipe.time %> min</p>
+                    <p>Difficulté : <%= recipe.difficulty %></p>
+                    <% if recipe.calories == nil %>
+                        <p>Calories : Non connu</p>
+                    <% else %>
+                        <p>Calories : <%= recipe.calories %></p>
+                    <% end %>
+                    <%= link_to 'Voir la recette', { :action =>'show', :id => recipe.id }, :class => "btn btn-large btn-success" %>
+                </div>
+            </div>
+        </div>
+    <% end %>
 </div>
 
-<%= link_to 'Retour', '/recipes_select', :class => "btn btn-danger" %>
+<%= link_to 'Retour', '/recipes_select', :class => "btn btn-danger", style: "margin-top: 10px;" %>
 
 <script>
-  $(document).ready(function() {
-  empty_recipe();
-  });
-
+    $(document).ready(function()
+    {
+        empty_recipe();
+    });
 </script>

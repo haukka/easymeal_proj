@@ -1,25 +1,85 @@
-<h1>Listing shopping_lists</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @shopping_lists.each do |shopping_list| %>
-      <tr>
-        <td><%= link_to 'Show', shopping_list %></td>
-        <td><%= link_to 'Edit', edit_shopping_list_path(shopping_list) %></td>
-        <td><%= link_to 'Destroy', shopping_list, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+<h1>Listes de courses</h1>
+<% if !current_user.home.nil? %>
+    <div class="row">
+        <div id="list_id">
+            <% @shopping_lists.each_with_index do |shopping_list, index| %>
+                <% if [0,2,3].include? index  %>
+                    <div class="row<% if index != 0 %> row-post-it<% end %>">
+                    <% if [0,3].include? index  %>
+                        <div class="col-md-2"></div>
+                    <% elsif index == 2 %>
+                        <div class="col-md-4"></div>
+                    <% end %>
+                <% end %>
+                <div class="center <% if [0,1,3,4].include? index %> col-md-3<% end %><% if index == 2 %> col-md-4<% end %>">
+                    <div class="post-it">
+		      <% if index > 0 %>
+                         <div class="close"><%= link_to '', shopping_list, method: :delete, data: { confirm: 'Are you sure?'}, :class => "glyphicon glyphicon-remove", style: "color: red;" %></div>
+			 <% end %>
+                        <%= link_to shopping_list.name, shopping_list %>
+                    </div>
+                </div>
+                <% if [0,1,3,4].include? index  %>
+                    <div class="col-md-2"></div>
+                    <% if [1,4].include? index %>
+                        </div>
+                    <% end %>
+                <% elsif index == 2 %>
+                    <div class="col-md-4"></div>
+                    </div>
+                <% end %>
+            <% end %>
+        </div>
+    </div>
+        
 <br>
+<div class="row">
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#shopping_list">
+        Ajouter une liste de course
+    </button>
+</div>
+<% end %>
+</div>
+</div>
 
-<%= link_to 'New Shopping list', new_shopping_list_path %>
+<script>
+$(document).ready(function()
+{
+    div_empty();
+    valid_submit_form();
+});
+</script>
+
+<div class="modal fade" id="shopping_list" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <%= form_for(@shopping_list) do |f| %>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Ajouter une liste de course</h4>
+            </div>
+            <div class="modal-body">
+                <% if @shopping_list.errors.any? %>
+                <div id="error_explanation">
+                    <h2><%= pluralize(@shopping_list.errors.count, "error") %> prohibited this shopping_list from being saved:</h2>
+                    <ul>
+                        <% @shopping_list.errors.full_messages.each do |msg| %>
+                        <li><%= msg %></li>
+                        <% end %>
+                    </ul>
+                </div>
+                <% end %>
+                <div class="field">
+                    <%= f.label :name, 'Nom :' %>
+                    <%= f.text_field :name, class: "white2" ,id: "name" %>
+                    <div id="name_error" class="hidden">Veuillez choisir un nom</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Retour</button>
+                <%= f.submit "Ajouter", class: "btn btn-large btn-success" %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AlimentsController < ApplicationController
   before_action :set_aliment, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate
@@ -16,6 +17,14 @@ class AlimentsController < ApplicationController
 
   # GET /aliments/1/edit
   def edit
+  end
+
+  def search
+    @q = Recipe.search(params[:q])
+    @recipes = @q.result(distinct: true)
+    respond_to do |format|
+      format.json { render json: { status: "OK", data: @recipes, message: nil } }
+    end
   end
 
   # PATCH/PUT /aliments/1
@@ -40,6 +49,6 @@ class AlimentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def aliment_params
-      params[:aliment]
+      params.require(:aliment).permit(:id)
     end
 end

@@ -1,0 +1,136 @@
+<div class="row">
+  <div class="col-md-11" style="text-align:center;">
+    <div class="panel panel-success">
+      <div class="panel-heading">Stock : <%= @stock.name %></div>
+      <div class="panel-body">
+	<div id="stock_mess" style="text-align: center;"></div>
+	<div class="table-responsive" style="height: 420px; overflow: auto;" id="table_res">
+	  <table class="table table-bordered">
+	    <thead>
+	      <tr>
+		<th style="text-align: center;">
+		  quantité
+		</th>
+		<th style="text-align: center;">
+		  Nom des aliments
+		  </th>
+	      </tr>
+	    </thead>
+	    <tbody id="stock_alim">
+	      <% @aliments.each do |aliment| %>
+	      <tr>
+		<td>
+		  <%= aliment.quantity %>
+		</td>
+		<td >
+		  <%= link_to aliment.aliment.name, "#my_modal", data: {toggle: "modal", target: "#my_modal", alim_id: aliment.id, quantity: aliment.quantity, alim_name: aliment.aliment.name} %>
+		</td>
+		<td>
+		  <%= link_to '', remove_alim_list_path(:alim_id => aliment.id), method: :post, :class => "glyphicon glyphicon-remove", style: "color: red;" %>
+		</td>
+	      </tr>
+	      <% end %>
+	    </tbody>
+	  </table>
+	</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-11">
+      <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#aliment_modal">
+	Ajouter un aliment
+      </button>
+      <%= link_to 'Retour', stocks_path, :class => "btn btn-danger" %>
+    </div>  
+    <%= form_for @stock, :url => reinit_stock_path , :html => { :method => :post } do |f| %>
+    <%= f.number_field :list_id, value: @id, class: "hide" %>
+    <%= f.submit "Reinitialiser la liste", class: "btn btn-large btn-success" %>
+    <% end %>
+  </div>
+</div>
+</div>
+
+<script>
+  $(document).ready(function() {
+  modif_alim();
+  completion();
+  valid_submit();
+  valid_submit_add();
+  empty_stock();
+  });
+</script>
+
+<div class="modal fade" id="aliment_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_for @stock, :url => associate_to_stock_path , :html => { :method => :post, :class => 'add', :id => 'add'} do |f| %>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Ajouter un stock</h4>
+      </div>
+      <div class="modal-body">
+	<% if @stock.errors.any? %>
+	<div id="error_explanation">
+	  <h2><%= pluralize(@disease.errors.count, "error") %> prohibited this disease from being saved:</h2>
+	  <ul>
+	    <% @stock.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+	    <% end %>
+	  </ul>
+	</div>
+	<% end %>
+	<div class="ui-widget field event">
+	  <%= f.label :aliment_id, "Aliment : " %>
+	  <input id="project" class="search_bar" value="" style="width:160px;" type="text1">
+	  <%= f.number_field :aliment_id, value: 0, class: "hide", id: "project-id" %>
+	  <div id="search_error" class="hidden">Veuillez choisir un aliment</div>
+	  <br>
+	  <%= f.label :quantity, "Quantité : " %>
+	  <%= f.number_field :quantity, value: 0, class:"white2" %>
+	  <%= f.number_field :list_id, value: @id, class: "hide" %>
+	</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Retour</button>
+	<%= f.submit "Ajouter", class: "btn btn-large btn-success" %>
+	<% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="my_modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_for @stock, :url => stock_alim_update_path, :html => { :method => :post, :class => 'edit', :id => 'edit'} do |func| %>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" name="aliment_name">Aliment : </h4>
+      </div>
+      <div class="modal-body">
+	<% if @stock.errors.any? %>
+	<div id="error_explanation">
+	  <h2><%= pluralize(@disease.errors.count, "error") %> prohibited this disease from being saved:</h2>
+	  <ul>
+	    <% @stock.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+	    <% end %>
+	  </ul>
+	</div>
+	<% end %>
+        <div class="field">
+	  <%= func.number_field :aliment_id, value: 0, class: "hide", id: "quantity_id" %>
+	  <%= func.label :quantity, "Quantité : "%>
+	  <%= func.number_field :quantity, value: 0, id: "quantity_value", class: "white2"%>
+	</div>
+      </div>
+      <div class="modal-footer">
+	<button type="button" class="btn btn-danger" data-dismiss="modal">Retour</button>
+	<%= func.submit "Modifier", class: "btn btn-large btn-success" %>
+	<% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div>

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate

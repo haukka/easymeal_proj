@@ -10,7 +10,9 @@
       </ul>
     </div>
   <% end %>
-
+  <div class="field">
+    <%= f.number_field :totalPrice, :value => 0, :type => 'hidden' %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

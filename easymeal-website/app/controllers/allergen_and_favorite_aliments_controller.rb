@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AllergenAndFavoriteAlimentsController < ApplicationController
   before_action :set_allergen_and_favorite_aliment, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate
@@ -8,9 +9,9 @@ class AllergenAndFavoriteAlimentsController < ApplicationController
   def index
     @allergen_and_favorite_aliments = AllergenAndFavoriteAliment.all
     @allergen_and_favorite_aliment = AllergenAndFavoriteAliment.new
-    @allergen_aliment = AllergenAndFavoriteAliment.where(:allergy => true)
-    @favorite_aliment = AllergenAndFavoriteAliment.where(:favori => true)
-    @nfavorite_aliment = AllergenAndFavoriteAliment.where(:favori => false)
+    @allergen_aliment = current_user.allergen_and_favorite_aliments.where(:allergy => true)
+    @favorite_aliment = current_user.allergen_and_favorite_aliments.where(:favori => true)
+    @nfavorite_aliment = current_user.allergen_and_favorite_aliments.where(:favori => false)
   end
 
   # GET /allergen_and_favorite_aliments/1

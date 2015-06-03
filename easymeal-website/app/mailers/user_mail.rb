@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class UserMail < ActionMailer::Base
   default from: "from@example.com"
 

@@ -1,4 +1,138 @@
-<p id="notice"><%= notice %></p>
+<h1><%= @shopping_list.name %></h1>
 
-<%= link_to 'Edit', edit_shopping_list_path(@shopping_list) %> |
-<%= link_to 'Back', shopping_lists_path %>
+<div class="row">
+    <div class="col-md-2"></div>
+
+    <div class="col-md-8">
+      <div id="list_mess" style="text-align:center;">
+        <table class="table table-bordered">
+          <thead>
+            <th class="center">Quantité</th>
+            <th class="center">Nom</th>
+          </thead>
+          <tbody id="list_alim">
+            <% @aliments.each do |aliment| %>
+            <tr>
+              <td><%= aliment.quantity %><% if aliment.aliment.isQuantifiable %> g<% end %></td>
+              <td><%= link_to aliment.aliment.name, "#my_modal", data: {toggle: "modal", target: "#my_modal", alim_id: aliment.id, quantity: aliment.quantity, alim_name: aliment.aliment.name} %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="col-md-2"></div>
+
+</div>
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+            <div class="col-md-4"><button class="btn btn-success btn-lg" data-toggle="modal" data-target="#aliment_modal">Ajouter</button></div>
+            <div class="col-md-4">
+                <%= form_for @shopping_list, :url => alim_list_validate_path , :html => { :method => :post } do |f| %>
+                    <%= f.number_field :list_id, value: @id, class: "hide" %>
+                    <%= f.submit "Valider", class: "btn btn-large btn-success" %>
+                <% end %>
+            </div>
+            <div class="col-md-4">
+                <%= form_for @shopping_list, :url => reinit_shopping_lists_path , :html => { :method => :post } do |f| %>
+                    <%= f.number_field :list_id, value: @id, class: "hide" %>
+                    <%= f.submit "Reinitialiser", class: "btn btn-large btn-danger" %>
+                <% end %>
+            </div>
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+    <div class="row" style="margin-top: 30px;">
+        <%= link_to 'Retour', shopping_lists_path, :class => "btn btn-primary" %>
+    </div>
+</div>
+
+
+
+<script>
+  $(document).ready(function() {
+  modif_alim();
+  completion();
+  valid_submit_add();
+  empty_list();
+  });
+</script>
+
+<div class="modal fade" id="aliment_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_for @shopping_list, :url => associate_to_shopping_lists_path , :html => { :method => :post, :class => 'add', :id => 'add' } do |f| %>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Ajouter un aliment</h4>
+      </div>
+      <div class="modal-body">
+	<% if @shopping_list.errors.any? %>
+	<div id="error_explanation">
+	  <h2><%= pluralize(@disease.errors.count, "error") %> prohibited this disease from being saved:</h2>
+	  <ul>
+	    <% @shopping_list.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+	    <% end %>
+	  </ul>
+	</div>
+	<% end %>
+	<div class="ui-widget field event">
+	  <%= f.label :aliment_id, "Aliment :" %>
+	  <input id="project" class="search_bar" value="" style="width:160px;" type="text1">
+	  <%= f.number_field :aliment_id, value: 0, class: "hide", id: "project-id" %>
+	  <div id="search_error" class="hidden">Veuillez choisir un aliment</div>
+	  <br>
+	  <%= f.label :quantity, "Quantité :" %>
+	  <%= f.number_field :quantity, value: 0, class: "white2" %>
+	  <%= f.number_field :list_id, value: @id, class: "hide" %>
+	</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Retour</button>
+	<%= f.submit "Ajouter", class: "btn btn-large btn-success" %>
+	<% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="my_modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_for @shopping_list, :url => alim_list_update_path, :html => { :method => :post } do |func| %>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" name="aliment_name">Aliment : </h4>
+      </div>
+      <div class="modal-body">
+	<% if @shopping_list.errors.any? %>
+	<div id="error_explanation">
+	  <h2><%= pluralize(@disease.errors.count, "error") %> prohibited this disease from being saved:</h2>
+	  <ul>
+	    <% @shopping_list.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+	    <% end %>
+	  </ul>
+	</div>
+	<% end %>
+        <div>
+	  <%= func.number_field :aliment_id, value: 0, class: "hide", id: "quantity_id" %>
+	  <%= func.label :quantity, "Quantité :" %>
+	  <%= func.number_field :quantity, value: 0, id: "quantity_value", class: "white2" %>
+	</div>
+      </div>
+      <div class="modal-footer">
+	<button type="button" class="btn btn-danger" data-dismiss="modal">Retour</button>
+	<%= func.submit "Modifier", class: "btn btn-large btn-success" %>
+	<% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+

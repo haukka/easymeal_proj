@@ -1,17 +1,115 @@
-<%= form_for(@recipe) do |f| %>
-  <% if @recipe.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
+<%= nested_form_for(@recipe, :html => {:class => 'recipe_editor'}) do |f| %>
+    <% if @recipe.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
 
-      <ul>
-      <% @recipe.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+            <ul>
+                <% @recipe.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="form-group">
+            <%= f.label :name %><br>
+            <%= f.text_field :name %>
+        </div>
+    
+        <div class="form-group">
+            <%= f.label :time %><br>
+            <%= f.number_field :time, min: 0 %>
+        </div>
+    
+        <div class="form-group">
+            <%= f.label :difficulty %><br>
+            <%= f.number_field :difficulty, min: 0 %>
+        </div>
+    
+        <div class="form-group">
+            <%= f.label :price %><br>
+            <%= f.number_field :price, min: 0 %>
+        </div>
+
+	<div class="form-group">
+	  <%= f.label :number_of_servings %><br>
+	  <%= f.number_field :nb_servings, min: 1 %>
+	</div>
+        
+        <div class="form-group">
+            <%= f.collection_check_boxes(:recipe_categories, RecipeCategory.all, :id, :name) do |b| %>
+              <%= b.label(:"data-value" => b.value) { b.check_box + b.text } %>
+            <% end %>
+        </div>
+        
+        <div class="form-group">
+            <%= f.label :photo %><br>
+            <%= f.file_field :photo %>
+        </div>
     </div>
-  <% end %>
+    
+    <div class="col-md-5">
+        <div class="form-group">
+            <%= f.label :text %><br>
+            <%= f.text_area :text, rows: 13 %>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+        <br>
+                <% index = 0 %>
+                <%= f.fields_for :aliments_quantity do |aliments_quantity_form| %>
+                    <div class="row">
+                        <div class="form-group col-md-3"><%= aliments_quantity_form.number_field :quantity %></div>
+                        <div class="form-group col-md-7" id="aliment_col">
+                          <%= aliments_quantity_form.text_field :aliment_id, type: "hidden" %>
+                          <% if @recipe.aliments_quantity[index] %>
+                              <input data-autocomplete="/recipes/autocomplete_aliment_name" data-id-element="#recipe_aliments_quantity_attributes_<%= index.to_s %>_aliment_id" id="aliment_<%= index.to_s %>" type="text" class="ui-autocomplete-input" autocomplete="off" value="<%= @recipe.aliments_quantity[index].aliment.name %>">
+                          <% end %>
+                        <!--recipe_aliments_quantity_attributes_<%= index.to_s %>_aliment_id -->
+                        </div>
+
+                          <div class="form-group col-md-2">
+                              <%= aliments_quantity_form.link_to_remove do %>
+                                  <span class="glyphicon glyphicon-remove" aria-hidden="true">
+                              <%end%>
+                          </div>
+                          <% index += 1 %>
+                      </div>
+                <% end %>
+        <div id="new_aliments">
+            <%= f.link_to_add "Add an aliment", :aliments_quantity %>
+        </div>
+    </div>
+</div>
+
+    <div class="actions">
+        <%= f.submit %>
+    </div>
 <% end %>
+
+<script>
+    $(document).ready(function()
+    {
+        $('#new_aliments').bind("DOMSubtreeModified",function()
+        {
+          $("#new_aliments .fields #aliment_col").each(function()
+          {
+              console.log($(this));
+               console.log($(this).children().length);
+               if ($(this).children().length < 2)
+               {
+                   var id = $(this).children()[0].id;
+                   
+                   var myRegexp = /recipe_aliments_quantity_attributes_(\d+)_aliment_id/g;
+                   var match = myRegexp.exec(id);
+                   console.log(match[1]);
+                   $(this).append('<input data-autocomplete="/recipes/autocomplete_aliment_name" data-id-element="#recipe_aliments_quantity_attributes_'+ match[1] +'_aliment_id" id="aliment_'+ match[1] +'" type="text" class="ui-autocomplete-input" autocomplete="off" value="">');
+               }
+          });
+        });
+    });
+</script>

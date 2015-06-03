@@ -1,19 +1,93 @@
-<p id="notice"><%= notice %></p>
+  <h1>Planning</h1>
+  <div style="height: 30px; border-radius: 7px; background: #4eda57; text-align: left;">
+    <div class="col-md-3">
+      <a href="javascript:window.print()" class="linkprint" style="margin-left: 20px;">Imprimer</a>
+    </div>
+    <div class="row">
+      <div class="row col-md-1" style="margin-left:80px; margin-top: 5px;">
+        <div class="circle">
+  	  <%= link_to '', menu_schedules_path(:date => @previ), :class => "glyphicon glyphicon-chevron-left", style: "color: green;"  %>
+        </div>
+      </div>
+      <div class="row col-md-4" style="margin-left:-70px;">
+        <p class="date_select" style="text-align:center;"><%= @week %></p>
+      </div>
+      <div class="row col-md-1" style="margin-top: 5px; margin-left: -30px;">
+        <div class="circle">
+  	  <%= link_to '', menu_schedules_path(:date => @nexti), :class => "glyphicon glyphicon-chevron-right", style: "color: green;"  %>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <p style="text-align:right;" class="generation">Génération automatique</p>
+      </div>
+    </div>
+  </div>
+  <br />
 
-<p>
-  <strong>Weeknumber:</strong>
-  <%= @menu_schedule.weekNumber %>
-</p>
-
-<p>
-  <strong>Year:</strong>
-  <%= @menu_schedule.year %>
-</p>
-
-<p>
-  <strong>Home:</strong>
-  <%= @menu_schedule.home_id %>
-</p>
-
-<%= link_to 'Edit', edit_menu_schedule_path(@menu_schedule) %> |
-<%= link_to 'Back', menu_schedules_path %>
+<div class="row" id="menu_week">
+  <% @day_array.each_with_index do |day, index| %>
+  <% if  @first_day == Date.today() && index == 0 %>
+  <div class="col-md-1 day_menu">
+    <h2 class="current_day"><%= day %></h2>
+    <div class="current_color morningdiv">
+      <% if @day_array_recipe[index][1] != 0 %>
+      <ul>
+	<% @day_array_recipe[index][1].to_a.each do |recipe| %>
+	<li><%= recipe.name %></li>
+	<% end %>
+      </ul>
+      <% end %>
+    </div>
+    <div class="current_color daydiv">
+      <% if @day_array_recipe[index][2] != 0 %>
+      <ul>
+	<% @day_array_recipe[index][2].to_a.each do |recipe| %>
+	<li><%= recipe.name %></li>
+	<% end %>
+      </ul>
+      <% end %>
+    </div>
+    <div class="current_color daydiv">
+      <% if @day_array_recipe[index][3] != 0 %>
+      <ul>
+	<% @day_array_recipe[index][3].to_a.each do |recipe| %>
+	<li><%= recipe.name %></li>
+	<% end %>
+      </ul>
+      <% end %>
+    </div>
+  </div>
+  <% else %>
+  <div class="col-md-1 day_menu">
+    <h2 class="day"><%= day %></h2>
+    <div class="day_color morningdiv">
+      <% if @day_array_recipe[index][1] != 0 %>
+      <ul>
+	<% @day_array_recipe[index][1].to_a.each do |recipe| %>
+	<li><%= recipe.name %></li>
+	<% end %>
+      </ul>
+      <% end %>
+    </div>
+    <div class="day_color daydiv">
+      <% if @day_array_recipe[index][2] != 0 %>
+      <ul>
+	<% @day_array_recipe[index][2].to_a.each do |recipe| %>
+	<li><%= recipe.name %></li>
+	<% end %>
+	</ul>
+      <% end %>
+    </div>
+    <div class="day_color daydiv">
+      <% if @day_array_recipe[index][3] != 0 %>
+      <ul>
+	<% @day_array_recipe[index][3].to_a.each do |recipe| %>
+	<li><%= recipe.name %></li>
+	<% end %>
+      </ul>
+      <% end %>
+    </div>
+  </div>
+  <% end %>
+  <% end %>
+</div>

@@ -1,0 +1,20 @@
+<div id="sidebar">
+  <a id="general" href="#">G&eacute;n&eacute;ral</a>
+  <a id="alimentation" href="/allergen_and_favorite_aliments">Alimentation</a>
+  <a id="health" href="/diet_types">Santé</a>
+  <div class="general"></div>
+</div>
+
+<div id="page" style="margin-top: -10px">
+<div class="col-md-11">
+  <h1>Profil</h1>
+</div>
+
+
+<script type="text/javascript">
+    $('#cropbox').Jcrop();
+</script>
+  <div class="row">
+    <%= image_tag @user.photo.url(:medium), :id => "cropbox" %>
+  </div>
+</div>

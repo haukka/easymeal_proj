@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class HomesController < ApplicationController
   before_action :set_home, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate
@@ -32,8 +33,6 @@ class HomesController < ApplicationController
   # POST /homes/choose.json
   def choose
     @home = Home.find_by(id: params[:home][:id])
-    puts "=========================================================="
-    puts params.inspect
     @user = current_user
 
     respond_to do |format|
@@ -64,15 +63,20 @@ class HomesController < ApplicationController
   # POST /homes.json
   def create
     @home = Home.new(home_params)
-      @home.householder = current_user
-      @home.users << current_user
+    @home.householder = current_user
+    @home.users << current_user
+    @message = "<ul>"
+    @home.errors.messages.each do |message|
+        @message += "<li>" + message + "</li>"
+    end
+    @message += "</ul>"
     respond_to do |format|
       if @home.save
         format.html { redirect_to edit_user_path(current_user), notice: 'Home was successfully created.' }
-        format.json { render json: { success: "Le foyer a été créé avec succès.", home: @home } }
+        format.json { render json: { status: "OK", data: { home: @home }, message: "Le foyer a été créé avec succès." } }
       else
         format.html { render action: 'new' }
-        format.json { render json: { error: @home.errors } }
+        format.json { render json: { status: "KO", data: nil, message: @home.errors.messages } }
       end
     end
   end
