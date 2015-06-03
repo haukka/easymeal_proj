@@ -1,7 +1,6 @@
-# -*- encoding : utf-8 -*-
 # == Schema Information
 #
-# Table name: diseases
+# Table name: recipe_categories
 #
 #  id         :integer          not null, primary key
 #  name       :string(255)
@@ -9,8 +8,9 @@
 #  updated_at :datetime
 #
 
-require 'spec_helper'
+# Read about factories at https://github.com/thoughtbot/factory_girl
 
-describe Disease do
-  pending "add some examples to (or delete) #{__FILE__}"
+FactoryGirl.define do
+  factory :recipe_category do
+  end
 end

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 #!/usr/bin/env rvm 2.0.0 do ruby
 # encoding: utf-8
 
@@ -107,11 +108,40 @@ File.open("../db/seeds.rb", 'w') do |file|
   end
   file.write("\n")
   file.write('Recipe.create(name: "Cordon bleu et petit poids", ' + 
-'aliments_quantity: [ AlimentsQuantity.create(aliment: Aliment.find_by(name: "Petit pois, appertisé, égoutté"), quantity: 100), ' +
-'AlimentsQuantity.create(aliment: Aliment.find_by(name: "Cordon bleu de volaille"), quantity: 1)],' +
-'text: "<ol>Dans une poêle, faire dorer les cordons bleus 5 minutes de chaque côté sans ajout de matière grasse.</ol>' +
-'<ol>Ouvrez la boîte de petits pois et faites chauffer dans une casserole le temps indiqué.</ol>' +
-'<ol>Égouttez les petits pois et servez.</ol>", time: 10, price: 1, difficulty: 1)
+  'aliments_quantity: [ AlimentsQuantity.create(aliment: Aliment.find_by(name: "Petit pois, appertisé, égoutté"), quantity: 100), ' +
+  'AlimentsQuantity.create(aliment: Aliment.find_by(name: "Cordon bleu de volaille"), quantity: 1)],' +
+  'text: "<ol>Dans une poêle, faire dorer les cordons bleus 5 minutes de chaque côté sans ajout de matière grasse.</ol>' +
+  '<ol>Ouvrez la boîte de petits pois et faites chauffer dans une casserole le temps indiqué.</ol>' +
+  '<ol>Égouttez les petits pois et servez.</ol>", time: 10, price: 3, difficulty: 1, photo: File.open("app/assets/images/recipes/petits_poids_cordon.png"))
+Recipe.create(name: "Crumble aux pommes", ' +
+  'aliments_quantity: [ AlimentsQuantity.create(aliment: Aliment.find_by(name: "Pomme, fraîche, pulpe et peau"), quantity: 1200), ' +
+  'AlimentsQuantity.create(aliment: Aliment.find_by(name: "Sucre roux"), quantity: 150), ' +
+  'AlimentsQuantity.create(aliment: Aliment.find_by(name: "Farine de blé tendre ou froment T110"), quantity: 150), ' +
+  'AlimentsQuantity.create(aliment: Aliment.find_by(name: "Beurre doux"), quantity: 125), ' +
+  'AlimentsQuantity.create(aliment: Aliment.find_by(name: "Cannelle"), quantity: 2)],' +
+  'text: "<ol>Préchauffer le four à thermostat 7 (210°C).</ol>' +
+  '<ol>Peler, évider et découper les pommes en cubes grossiers, les répartir dans un plat allant au four, verser dessus le jus du citron et la cannelle.</ol>' +
+  '<ol>Dans un saladier, mélanger la farine et la cassonade. Puis ajouter le beurre en petits cubes et mélanger à la main de façon à former une pâte grumeleuse.</ol>' +
+  '<ol>Émietter cette pâte au dessus des pommes de façon à les recouvrir. Mettre au four une bonne 1/2 heure.</ol>", time: 100, price: 3, difficulty: 1, photo: File.open("app/assets/images/recipes/crumble.jpg"))
+Recipe.create(name: "Cake salé au jambon et aux olives", ' +
+  'aliments_quantity: [ AlimentsQuantity.create(aliment: Aliment.find_by(name: "Farine de blé tendre ou froment T55 (pour pains)"), quantity: 150), ' +
+  'AlimentsQuantity.create(aliment: Aliment.find_by(name: "Jambon cuit"), quantity: 200),' +
+  'AlimentsQuantity.create(aliment: Aliment.find_by(name: "Olive verte, entière ou dénoyautée, en saumure"), quantity: 150),' +
+  'AlimentsQuantity.create(aliment: Aliment.find_by(name: "Emmental râpé"), quantity: 75),' +
+  'AlimentsQuantity.create(aliment: Aliment.find_by(name: "Emmental râpé"), quantity: 75),' +
+  'AlimentsQuantity.create(aliment: Aliment.find_by(name: "Oeuf, cru"), quantity: 75),' +
+  'AlimentsQuantity.create(aliment: Aliment.find_by(name: "Lait demi-écrémé, UHT"), quantity: 10),' +
+  'AlimentsQuantity.create(aliment: Aliment.find_by(name: "Levure alimentaire"), quantity: 10),' +
+  'AlimentsQuantity.create(aliment: Aliment.find_by(name: "Huile d\'olive vierge"), quantity: 1.5)],' +
+  'text: "<ol>Couper les olives en rondelles. Couper le jambon en morceaux. </ol>' +
+  '<ol>Verser les oeufs dans la farine et mélanger. Ajouter le lait et l\'huile puis mélanger. Ajouter le jambon, les olives et le gruyère puis mélanger. Ajouter la levure et, pour ne pas changer, mélanger.</ol>' +
+  '<ol>Mettre le tous dans un plat à cake au préalable beurré et placer dans un four chaud à thermostat 6 (180°C) pendant 45 min.</ol>", time: 65, price: 4, difficulty: 1, photo: File.open("app/assets/images/recipes/cake_jambon_olives.jpg"))
+Recipe.create(name: "Cordon bleu et haricots", aliments_quantity: [ AlimentsQuantity.create(aliment: alim1 = Aliment.find_by(name: "Haricot vert, surgelé, cuit"), quantity: 100), AlimentsQuantity.create(aliment: alim2 = Aliment.find_by(name: "Cordon bleu de volaille"), quantity: 1)],text: "<ol><li>Dans une poêle, faire dorer les cordons bleus 5 minutes de chaque côté sans ajout de matière grasse.</li><li>Ouvrez le sachet d\'haricots verts et faites chauffer dans une casserole le temps indiqué.</li><li>Servez les haricots verts accompagnés des cordon bleus.</li></ol>", time: 10, price: 1, difficulty: 1, calories: alim1.calories + alim2.calories, photo: File.open("app/assets/images/recipes/cordon_haricot.jpg"))
+Recipe.create(name: "Purée de haricots verts", aliments_quantity: [ AlimentsQuantity.create(aliment: alim1 = Aliment.find_by(name: "Haricot vert, surgelé, cuit"), quantity: 200), AlimentsQuantity.create(aliment: alim2 = Aliment.find_by(name: "Pomme de terre, sans peau, cuite au four"), quantity: 1), AlimentsQuantity.create(aliment: alim3 = Aliment.find_by(name: "Crème fraîche >= 30% MG, épaisse, rayon frais"), quantity: 20), AlimentsQuantity.create(aliment: alim4 = Aliment.find_by(name: "Ail frais"), quantity: 2)], text: "<ol><li> Equeuter et laver les haricots.</li><li>Mettre les haricots et les pommes de terre en autocuiseur et cuire 10 min à la vapeur.</li><li>Mixer le tout avec les gousses d\'ail.</li><li>Y ajouter la crème fraîche.</li></li>Présenter la purée dans un joli plat ou en ramequin individuel avec une pointe de persil.</li></ol>", time: 10, price: 1, difficulty: 1, calories: alim1.calories + alim2.calories + alim3.calories + alim4.calories, photo: File.open("app/assets/images/recipes/puree_haricot.jpg"))
+Recipe.create(name: "Oeuf à la coque", aliments_quantity: [ AlimentsQuantity.create(aliment: alim1 = Aliment.find_by(name: "Oeuf dur"), quantity: 1)],text: "<ol><li>Cuire 3 minutes après ébullition.</li><li>Egoutter.</li><li>Mettre dans le coquetier, découper le dessus de l\'oeuf délicatement.</li><li>Servir.</li></ol>", time: 3, price: 1, difficulty: 1, calories: alim1.calories, photo: File.open("app/assets/images/recipes/oeuf_coque.jpg"))
+Recipe.create(name: "Tarte à la tomate", aliments_quantity: [ AlimentsQuantity.create(aliment: alim1 = Aliment.find_by(name: "Pâte brisée, cuite"), quantity: 1), AlimentsQuantity.create(aliment: alim2 = Aliment.find_by(name: "Tomate, crue"), quantity: 6), AlimentsQuantity.create(aliment: alim3 = Aliment.find_by(name: "Moutarde"), quantity: 1), AlimentsQuantity.create(aliment: alim4 = Aliment.find_by(name: "Huile d\'olive vierge"), quantity: 1), AlimentsQuantity.create(aliment: alim5 = Aliment.find_by(name: "Herbes aromatiques fraîches (aliment moyen)"), quantity: 1)], text: "<ol><li>Etaler la pâte dans le moule et piquer le fond avec une fourchette.</li><li>Etaler la moutarde.</li><li>Couper les tomates en rondelles ou en quartiers et les faire dégorger avec du sel.</li><li>Placer les tomates en rosace puis arroser le tout de la cuillère d\'huile d\'olive.</li><li>Saupoudrer le tout avec des herbes aromatiques.</li><li>Faire cuire 25 min à 180°C.</li></ol>", time: 25, price: 1, difficulty: 1, calories: alim1.calories + alim2.calories + alim3.calories + alim4.calories + alim5.calories, photo: File.open("app/assets/images/recipes/tarte_tomate.jpg"))
+Recipe.create(name: "Melon campagnard", aliments_quantity: [ AlimentsQuantity.create(aliment: alim1 = Aliment.find_by(name: "Melon, frais, pulpe"), quantity: 10), AlimentsQuantity.create(aliment: alim2 = Aliment.find_by(name: "Jambon cru"), quantity: 1),  AlimentsQuantity.create(aliment: alim3 = Aliment.find_by(name: "Tomate, crue"), quantity: 1)],text: "<ol><li>Découper 5 fines tranches de melon.</li><li>Découper 5 fines tranches dans le jambon et prédécouper la chair en cube</li><li>Disposer dans l\'assiette.</li><li>Ajouter le jambon cru découper en lamelles.</li><li>Déposer la tomate coupée en quartiers. </li></ol>", time: 10, price: 1, difficulty: 1, calories: alim1.calories + alim2.calories + alim3.calories, photo: File.open("app/assets/images/recipes/melon_campagnard.jpg"))
+Recipe.create(name: "Oeuf au plat poivron", aliments_quantity: [ AlimentsQuantity.create(aliment: alim1 = Aliment.find_by(name: "Oeuf dur"), quantity: 1), AlimentsQuantity.create(aliment: alim2 = Aliment.find_by(name: "Poivron, vert, jaune ou rouge, cuit"), quantity: 1),  AlimentsQuantity.create(aliment: alim3 = Aliment.find_by(name: "Sel blanc alimentaire, iodé, non fluoré (marin, ignigène ou gemme)"), quantity: 1),  AlimentsQuantity.create(aliment: alim4 = Aliment.find_by(name: "Poivre noir, moulu"), quantity: 1),  AlimentsQuantity.create(aliment: alim5 = Aliment.find_by(name: "Huile d\'olive vierge"), quantity: 1),  AlimentsQuantity.create(aliment: alim6 = Aliment.find_by(name: "Beurre doux"), quantity: 1)],text: "<ol><li>Laver le poivron, et couper des lamelles de 1 cm environ, bien l\'évider.</li><li>Faire chauffer un peu d\'huile et de beurre  dans une poêle faire revenir les poivrons, ajouter l\'oeufs à l\'interieur, saler poivrer.</li><li>Servir.</li></ol>", time: 15, price: 1, difficulty: 1, calories: alim1.calories + alim2.calories + alim3.calories + alim4.calories + alim5.calories + alim6.calories, photo: File.open("app/assets/images/recipes/oeuf_poivron.jpg"))
 
 DietType.create(name: "Stabilisation")
 DietType.create(name: "Hypocalorique")

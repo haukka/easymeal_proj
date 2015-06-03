@@ -1,9 +1,8 @@
-# -*- encoding : utf-8 -*-
 require 'spec_helper'
 
-describe "diseases/show" do
+describe "recipe_categories/show" do
   before(:each) do
-    @disease = assign(:disease, stub_model(Disease))
+    @recipe_category = assign(:recipe_category, stub_model(RecipeCategory))
   end
 
   it "renders attributes in <p>" do
